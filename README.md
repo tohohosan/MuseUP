@@ -1,7 +1,9 @@
 # MuseUP (みゅーじあっぷ)
 Figma：https://www.figma.com/design/AKh4o0wpuAARXc1Ha80qgS/%E7%84%A1%E9%A1%8C?node-id=0-1&t=hWs0E2hdRpTOl0hV-1
   
+ER図：https://lucid.app/lucidchart/2716b1de-cf07-4dcc-a26d-5aad6ebfddd3/edit?viewport_loc=-2115%2C-398%2C3078%2C2316%2C0_0&invitationId=inv_d7b8efe5-7b2a-43b8-8af5-8c2bc4022823
   
+ 
 ■サービス概要  
 近くのミュージアム（博物館・美術館等）を調べることができるサービスです。
 初期データのミュージアム以外にも新規にスポットを投稿したり、ミュージアムの口コミを投稿したり、ミュージアムを「行きたい」「行った」リストにまとめることができます。
