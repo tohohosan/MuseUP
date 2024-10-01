@@ -1,7 +1,7 @@
 # MuseUP (みゅーじあっぷ)
 Figma：https://www.figma.com/design/AKh4o0wpuAARXc1Ha80qgS/%E7%84%A1%E9%A1%8C?node-id=0-1&t=hWs0E2hdRpTOl0hV-1
   
-ER図：https://lucid.app/lucidchart/2716b1de-cf07-4dcc-a26d-5aad6ebfddd3/edit?viewport_loc=-1469%2C-604%2C2994%2C1391%2C0_0&invitationId=inv_d7b8efe5-7b2a-43b8-8af5-8c2bc4022823
+ER図：https://lucid.app/lucidchart/2716b1de-cf07-4dcc-a26d-5aad6ebfddd3/edit?viewport_loc=-2148%2C-109%2C4039%2C1876%2C0_0&invitationId=inv_d7b8efe5-7b2a-43b8-8af5-8c2bc4022823
   
  
 ■サービス概要  
