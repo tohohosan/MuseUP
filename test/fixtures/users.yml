@@ -1,9 +1,9 @@
 one:
   email: "user_one@example.com"
-  password_digest: <%= User.digest('password') %>
+  password_digest: "$2a$12$oqwAGxnZFA1lvi6ALnl3NO7lxoUP8gORf3KCDzCqcn9x9HWqijOV."
   username: "User One"
 
 two:
   email: "user_two@example.com"
-  password_digest: <%= User.digest('password') %>
+  password_digest: "$2a$12$oqwAGxnZFA1lvi6ALnl3NO7lxoUP8gORf3KCDzCqcn9x9HWqijOV."
   username: "User Two"
