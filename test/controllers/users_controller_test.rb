@@ -1,6 +1,11 @@
 require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
+  def setup
+    @user = users(:one) # 必要に応じて適切なテストユーザーをセットアップ
+    sign_in @user       # ログイン処理を追加
+  end
+
   test "should get show" do
     get user_path(@user)
     assert_response :success
