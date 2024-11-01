@@ -8,9 +8,12 @@ module.exports = {
     './app/views/**/*.{erb,haml,html,slim}'
   ],
   theme: {
-    extend: {
-
-    },
+    extend: {},
+    fontFamily: {
+      body: [
+        "メイリオ"
+      ]
+    }
   },
   plugins: [
     require('@tailwindcss/forms'),
