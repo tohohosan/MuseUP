@@ -1,6 +1,8 @@
 require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   def setup
     @user = users(:one) # 必要に応じて適切なテストユーザーをセットアップ
     sign_in @user       # ログイン処理を追加
