@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get "users/:id", to: "users/registrations#show", as: :user
+    get "users/:id/edit", to: "users/registrations#edit", as: :edit_user
+    patch "users/:id", to: "users/registrations#update", as: :update_user
   end
 
   root "staticpages#top"
