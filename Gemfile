@@ -26,6 +26,8 @@ gem "rails-i18n"
 gem "devise-i18n"
 gem "devise-i18n-views"
 
+gem "aws-sdk-s3", require: false
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
