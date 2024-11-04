@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     patch "users/:id", to: "users/registrations#update", as: :update_user
   end
 
+  resources :museums
   root "staticpages#top"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
