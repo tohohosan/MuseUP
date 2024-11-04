@@ -19,7 +19,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get update" do
-    get update_user_path(@user), params: { user: { name: "Updated Name" } }
+    patch update_user_path(@user), params: { user: { name: "Updated Name" } }
     assert_response :redirect
   end
 end
