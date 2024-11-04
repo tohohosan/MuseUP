@@ -1,10 +1,10 @@
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
   <div class="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-    <h2 class="text-2xl font-semibold text-center mb-4">ログイン</h2>
+    <h2 class="text-2xl font-semibold text-center mb-4 border-b-2">ログイン</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-4" }) do |f| %>
       <div class="field">
-        <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.label :email, class: "block text-sm font-medium text-gray-700 mt-8" %>
         <%= f.email_field :email, class: "input input-bordered w-full", autofocus: true, autocomplete: "email" %>
       </div>
 
