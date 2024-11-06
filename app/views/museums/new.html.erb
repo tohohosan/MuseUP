@@ -1,41 +1,43 @@
-<div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-4">
+<div class="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-md space-y-4">
     <%= form_with model: @museum, local: true do |f| %>
         <h2 class="text-2xl font-semibold text-center mb-4 border-b-2">ミュージアム投稿</h2>
 
-        <% if @museum.errors.any? %>
-            <div class="alert alert-error mb-4" role="alert" style="background-color: rgba(248, 84, 76, 0.4);">
-                <ul>
-                    <% @museum.errors.full_messages.each do |message| %>
-                        <li><%= message %></li>
-                    <% end %>
-                </ul>
-            </div>
-        <% end %>
+        <%= render 'shared/error_messages', object: @museum %>
 
         <div class="mt-8">
             <%= f.label :name, "ミュージアム名" %>
-            <%= f.text_field :name, id: "Name", autofocus: true, class: "input input-bordered w-full" %>
+            <%= f.text_field :name, id: "Name", placeholder: "名前を入力してください", autofocus: true, class: "input input-bordered w-full" %>
         </div>
 
         <div class="mt-4">
             <%= f.label :address, "住所" %>
-            <%= f.text_field :address, id: "Address", class: "input input-bordered w-full" %>
+            <%= f.text_field :address, id: "Address", placeholder: "ミュージアム名を候補から選択すると自動で入力されます", class: "input input-bordered w-full" %>
         </div>
 
         <div class="mt-4">
             <%= f.label :description, "説明" %>
-            <%= f.text_area :description, id: "Description", placeholder: "どんな場所か簡単に説明してください", class: "input input-bordered w-full", rows: 3 %>
+            <%= f.text_area :description, id: "Description", placeholder: "どんな場所か簡単に説明してください", class: "input input-bordered w-full" %>
         </div>
 
         <div class="mt-4">
             <%= f.label :categories, "カテゴリ" %>
-            <%= f.collection_check_boxes :category_ids, @categories, :id, :name %>
+            <div class="grid grid-cols-3 gap-2 mt-2">
+                <% @categories.each do |category| %>
+                    <label class="btn-category">
+                        <%= f.check_box :category_ids, { multiple: true, checked: @museum.category_ids.include?(category.id) }, category.id, nil %>
+                        <span><%= category.name %></span>
+                    </label>
+                <% end %>
+            </div>
+                <small class="text-gray-500">最低でも 1 つ以上選択してください</small>
         </div>
 
-        <div class="mt-4">
+        <div class="mt-8">
             <%= f.label :images, "画像アップロード" %>
-            <%= f.file_field :image, multiple: true, class: "file-input file-input-bordered w-full max-w-xs" %>
-            <small class="text-gray-500">最大4枚までアップロードできます</small>
+            <div class="mt-1">
+                <%= f.file_field :image, multiple: true, class: "file-input file-input-bordered w-full max-w-xs" %>
+            </div>
+                <small class="text-gray-500">最大 4 枚までアップロードできます</small>
         </div>
 
         <div class="mt-8">
@@ -43,4 +45,4 @@
         </div>
     <% end %>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&libraries=places&callback=initialize"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&libraries=places&callback=initialize&language=ja"></script>
