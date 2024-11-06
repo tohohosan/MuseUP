@@ -12,10 +12,15 @@ class Museum < ApplicationRecord
   validates :name, length: { maximum: 100, message: "名前は100文字以内で入力してください" }
   validates :description, length: { maximum: 500, message: "説明は500文字以内で入力してください" }
 
+  validate :must_have_at_least_one_category
   validate :validate_image_count
   validate :validate_address
 
   private
+
+  def must_have_at_least_one_category
+    errors.add(:categories, "カテゴリを少なくとも1つ選択してください") if categories.empty?
+  end
 
   # 画像が4枚以内であることを確認するカスタムバリデーション
   def validate_image_count
