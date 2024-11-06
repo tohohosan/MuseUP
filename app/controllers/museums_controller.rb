@@ -1,6 +1,6 @@
 class MuseumsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_museum, only: [:show, :edit, :update, :destroy]
+    before_action :set_museum, only: [ :show, :edit, :update, :destroy ]
 
     def index
         @museums = Museum.all

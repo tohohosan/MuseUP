@@ -32,7 +32,7 @@ class Museum < ApplicationRecord
   def validate_address
     geocoded = Geocoder.search(address)
     unless geocoded&.first&.coordinates.present?
-      errors.add(:address, 'が存在しません') # 「住所が存在しません」と表示される
+      errors.add(:address, "が存在しません") # 「住所が存在しません」と表示される
     end
   end
 end
