@@ -1,17 +1,41 @@
-<!-- マップを表示する要素 -->
-<div id="map" style="height: 600px;"></div>
+<div class="flex justify-center my-4">
+  <button class="btn btn-primary w-1/2" onclick="searchModal.showModal()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>詳しく検索する</button>
+</div>
+
+<div id="map" style="height: 650px;"></div>
+
+<dialog id="searchModal" class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">検索</h3>
+
+    <%= render 'shared/search_form' %>
+
+    <div class="modal-action">
+      <button class="btn" onclick="searchModal.close()">閉じる</button>
+    </div>
+  </div>
+</dialog>
 
 <script>
-  // 地図を初期化する関数
   function initMap() {
-    // 地図のオプション
+    // 地図要素を取得する（マーカーを表示させるために必要）
+    const mapElement = document.getElementById('map');
+
     const mapOptions = {
-      center: { lat: 35.6803997, lng: 139.7690174 }, // 地図の初期表示位置（東京）
-      zoom: 10 // ズームレベル
+      center: { lat: 35.14315728478154, lng: 136.91635162137968 },
+      zoom: 7
     };
 
-    // 地図を指定した要素に表示
-    const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    const map = new google.maps.Map(mapElement, mapOptions);
+
+    // マーカーを追加（museum の情報からマーカーを追加する）
+    <% @museums.each do |museum| %>
+      new google.maps.Marker({
+        position: {lat: <%= museum.latitude %>, lng: <%= museum.longitude %>},
+        map: map,
+        title: '<%= j museum.title %>'
+      });
+    <% end %>
   }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&callback=initMap"></script>
