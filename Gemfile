@@ -28,6 +28,10 @@ gem "devise-i18n-views"
 
 gem "aws-sdk-s3", require: false
 
+gem "dotenv-rails"
+
+gem "geocoder"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
