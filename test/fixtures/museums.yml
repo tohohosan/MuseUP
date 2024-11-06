@@ -2,16 +2,16 @@
 
 one:
   user: one
-  name: MyString
-  address: MyString
+  name: oneString
+  address: oneString
   latitude: 1.5
   longitude: 1.5
   description: MyText
 
 two:
   user: two
-  name: MyString
-  address: MyString
+  name: twoString
+  address: twoString
   latitude: 1.5
   longitude: 1.5
   description: MyText
