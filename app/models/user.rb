@@ -5,4 +5,5 @@ class User < ApplicationRecord
   has_one_attached :image # プロフィール画像添付設定
 
   has_many :museums, dependent: :destroy
+  has_many :reviews
 end

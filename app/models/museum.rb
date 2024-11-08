@@ -1,5 +1,6 @@
 class Museum < ApplicationRecord
   belongs_to :user
+  has_many :reviews
   has_many :museum_categories, dependent: :destroy
   has_many :categories, through: :museum_categories
   has_many_attached :images
@@ -11,6 +12,7 @@ class Museum < ApplicationRecord
   validates :categories, presence: { message: "カテゴリを少なくとも1つ選択してください" }
   validates :name, length: { maximum: 100, message: "名前は100文字以内で入力してください" }
   validates :description, length: { maximum: 500, message: "説明は500文字以内で入力してください" }
+  validates :url, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: "が有効なURL形式ではありません" }, allow_blank: true
 
   validate :must_have_at_least_one_category
   validate :validate_image_count

@@ -1,5 +1,5 @@
 class MuseumsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, except: [ :index ]
     before_action :set_museum, only: [ :show, :edit, :update, :destroy ]
 
     def index
@@ -17,7 +17,7 @@ class MuseumsController < ApplicationController
     def create
         @museum = current_user.museums.build(museum_params)
         if @museum.save
-            redirect_to @museum, notice: "ミュージアムが投稿されました。"
+            redirect_to new_museum_path, notice: "ミュージアムが投稿されました。"
         else
             @categories = Category.all
             render :new
@@ -49,6 +49,6 @@ class MuseumsController < ApplicationController
     end
 
     def museum_params
-        params.require(:museum).permit(:name, :address, :description, category_ids: [], images: [])
+        params.require(:museum).permit(:name, :address, :description, :url, images: [], category_ids: [])
     end
 end

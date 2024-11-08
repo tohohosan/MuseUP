@@ -3,7 +3,6 @@
     <h2 class="text-2xl font-semibold text-center mb-4 border-b-2">新規ユーザー登録</h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-4" }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field">
         <%= f.label :name, class: "block text-sm font-medium text-gray-700 mt-8" %>

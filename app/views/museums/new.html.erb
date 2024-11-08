@@ -2,8 +2,6 @@
     <%= form_with model: @museum, local: true do |f| %>
         <h2 class="text-2xl font-semibold text-center mb-4 border-b-2">ミュージアム投稿</h2>
 
-        <%= render 'shared/error_messages', object: @museum %>
-
         <div class="mt-8">
             <%= f.label :name, "ミュージアム名" %>
             <%= f.text_field :name, id: "Name", placeholder: "名前を入力してください", class: "input input-bordered w-full" %>
@@ -17,6 +15,11 @@
         <div class="mt-4">
             <%= f.label :description, "説明" %>
             <%= f.text_area :description, id: "Description", placeholder: "どんな場所か簡単に説明してください", class: "input input-bordered w-full" %>
+        </div>
+
+        <div class="mt-4">
+            <%= f.label :url, "URL" %>
+            <%= f.text_field :url, id: "Url", placeholder: "公式サイトの URL があれば入力してください", class: "input input-bordered w-full" %>
         </div>
 
         <div class="mt-4">
@@ -35,7 +38,7 @@
         <div class="mt-8">
             <%= f.label :images, "画像アップロード" %>
             <div class="mt-1">
-                <%= f.file_field :image, multiple: true, class: "file-input file-input-bordered w-full max-w-xs" %>
+                <%= f.file_field :images, multiple: true, class: "file-input file-input-bordered w-full max-w-xs" %>
             </div>
                 <small class="text-gray-500">最大 4 枚までアップロードできます</small>
         </div>
