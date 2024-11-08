@@ -33,7 +33,7 @@
       new google.maps.Marker({
         position: {lat: <%= museum.latitude %>, lng: <%= museum.longitude %>},
         map: map,
-        title: '<%= j museum.title %>'
+        title: '<%= j museum.name %>'
       });
     <% end %>
   }
