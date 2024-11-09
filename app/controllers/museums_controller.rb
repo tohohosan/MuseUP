@@ -4,6 +4,8 @@ class MuseumsController < ApplicationController
 
     def index
         @museums = Museum.all
+        @total_museum_count = @museums.count
+        @user_museum_count = current_user.museums.count if user_signed_in?
     end
 
     def show
@@ -16,11 +18,14 @@ class MuseumsController < ApplicationController
 
     def create
         @museum = current_user.museums.build(museum_params)
-        if @museum.save
-            redirect_to new_museum_path, notice: "ミュージアムが投稿されました。"
-        else
-            @categories = Category.all
-            render :new
+        respond_to do |format|
+            if @museum.save
+                format.html { redirect_to new_museum_path, notice: "ミュージアムが投稿されました。" }
+            else
+                @categories = Category.all
+                flash.now[:alert] = "ミュージアムの投稿に失敗しました。"
+                format.html { render :new, status: :unprocessable_entity }
+            end
         end
     end
 
