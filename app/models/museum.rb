@@ -9,7 +9,7 @@ class Museum < ApplicationRecord
   after_validation :geocode
 
   validates :name, :address, :description, presence: true
-  validates :categories, presence: { message: "カテゴリを少なくとも1つ選択してください" }
+  validates :categories, presence: { message: "を少なくとも1つ選択してください" }
   validates :name, length: { maximum: 100, message: "名前は100文字以内で入力してください" }
   validates :description, length: { maximum: 500, message: "説明は500文字以内で入力してください" }
   validates :url, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: "が有効なURL形式ではありません" }, allow_blank: true
@@ -21,7 +21,7 @@ class Museum < ApplicationRecord
   private
 
   def must_have_at_least_one_category
-    errors.add(:categories, "カテゴリを少なくとも1つ選択してください") if categories.empty?
+    errors.add(:categories, "を少なくとも1つ選択してください") if categories.empty?
   end
 
   # 画像が4枚以内であることを確認するカスタムバリデーション
@@ -32,9 +32,13 @@ class Museum < ApplicationRecord
   end
 
   def validate_address
-    geocoded = Geocoder.search(address)
-    unless geocoded&.first&.coordinates.present?
-      errors.add(:address, "が存在しません") # 「住所が存在しません」と表示される
+    if address.present?
+      geocoded = Geocoder.search(address)
+      if geocoded.blank? || geocoded.first&.coordinates.blank?
+        errors.add(:address, "が有効な住所ではありません") # より具体的なメッセージに修正
+      end
+    else
+    errors.add(:address, "を入力してください")
     end
   end
 end
