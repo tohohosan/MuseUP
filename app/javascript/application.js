@@ -3,3 +3,5 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 import './place_autocomplete.js'
+import { initMap } from "museums_map";
+window.initMap = initMap;
