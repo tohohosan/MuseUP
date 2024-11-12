@@ -9,6 +9,11 @@ class MuseumsController < ApplicationController
     end
 
     def show
+        @museum = Museum.find(params[:id])
+        respond_to do |format|
+            format.html
+            format.json { render json: @museum }
+        end
     end
 
     def new

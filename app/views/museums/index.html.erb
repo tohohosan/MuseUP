@@ -18,6 +18,11 @@
 
 <div id="map" style="height: 650px;"></div>
 
+<!-- JSON データを埋め込む -->
+<script type="application/json" id="museum-data">
+  <%= raw @museums.to_json(only: [:id, :name, :latitude, :longitude]) %>
+</script>
+
 <dialog id="searchModal" class="modal">
   <div class="modal-box">
     <h3 class="text-lg font-bold">検索</h3>
@@ -30,26 +35,19 @@
   </div>
 </dialog>
 
-<script>
-  function initMap() {
-    // 地図要素を取得する（マーカーを表示させるために必要）
-    const mapElement = document.getElementById('map');
+<dialog id="museumDetailModal" class="modal">
+  <div class="modal-box">
+    <h3 id="museumTitle" class="text-lg font-bold">ミュージアム詳細</h3>
 
-    const mapOptions = {
-      center: { lat: 35.14315728478154, lng: 136.91635162137968 },
-      zoom: 7
-    };
+    <div id="museumOverview">
+      <%= render 'shared/museum_overview' %>
+    </div>
 
-    const map = new google.maps.Map(mapElement, mapOptions);
+    <div class="modal-action">
+      <button class="btn" onclick="document.getElementById('museumDetailModal').close()">閉じる</button>
+      <a id="museumDetailLink" class="btn" href="#" target="_blank">詳細</a>
+    </div>
+  </div>
+</dialog>
 
-    // マーカーを追加（museum の情報からマーカーを追加する）
-    <% @museums.each do |museum| %>
-      new google.maps.Marker({
-        position: {lat: <%= museum.latitude %>, lng: <%= museum.longitude %>},
-        map: map,
-        title: '<%= j museum.name %>'
-      });
-    <% end %>
-  }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
