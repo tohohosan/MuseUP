@@ -1,10 +1,10 @@
-<div class="p-6 w-3/5 mx-auto bg-white rounded-xl shadow-md space-y-4">
+<div class="p-6 w-1/2 mx-auto bg-white rounded-xl shadow-md space-y-4">
     <h1 class="text-3xl font-bold mb-6"><%= @museum.name %></h1>
 
     <div class="carousel w-full flex justify-center items-center mb-4">
         <% @museum.images.each_with_index do |image, index| %>
             <div id="item<%= index + 1 %>" class="carousel-item max-w-xs">
-                <%= image_tag image.url, class: 'max-w-full max-h-64 object-contain mx-auto' %>
+                <%= image_tag image.url, class: 'max-w-full max-h-80 object-contain mx-auto' %>
             </div>
         <% end %>
     </div>
@@ -19,7 +19,7 @@
         <div role="tablist" class="tabs tabs-bordered w-full">
             <!-- 詳細情報タブ -->
             <input type="radio" name="my_tabs_2" id="tab1" class="hidden">
-            <label for="tab1" class="tab flex items-center gap-2">
+            <label for="tab1" class="tab flex-1 items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
                 </svg>
@@ -28,7 +28,7 @@
 
             <!-- レビュータブ -->
             <input type="radio" name="my_tabs_2" id="tab2" class="hidden">
-            <label for="tab2" class="tab flex items-center gap-2">
+            <label for="tab2" class="tab flex-1 items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
                 </svg>
