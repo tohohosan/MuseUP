@@ -1,0 +1,11 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Cross-Site Scripting",
+      "file": "app/views/shared/museum_show/_description.html.erb",
+      "line": 14,
+      "message": "Potentially unsafe model attribute in `link_to` href",
+      "confidence": "Weak"
+    }
+  ]
+}
