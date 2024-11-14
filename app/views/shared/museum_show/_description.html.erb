@@ -9,7 +9,11 @@
 
 <div class="text-lg my-8">
     <div class="font-bold mb-2">公式サイト</div>
-    <%= link_to @museum.url, @museum.url, class: "underline text-blue-500 hover:text-blue-700" %>
+    <% if @museum.url.present? && @museum.url =~ /\Ahttps?:\/\/[\S]+\z/ %>
+        <%= link_to @museum.url, @museum.url, class: "underline text-blue-500 hover:text-blue-700", target: "_blank", rel: "noopener" %>
+    <% else %>
+        <p class="text-red-500">有効なURLがありません</p>
+    <% end %>
 </div>
 
 <div class="text-lg my-8">
