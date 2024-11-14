@@ -1,9 +1,9 @@
 <div class="p-6 w-1/2 mx-auto bg-white rounded-xl shadow-md space-y-4">
     <div class="text-2xl font-semibold text-center border-b-2 mb-6"><%= @museum.name %></div>
 
-    <div class="carousel w-full flex justify-center items-center mb-4">
+    <div class="carousel w-full mb-4">
         <% @museum.images.each_with_index do |image, index| %>
-            <div id="item<%= index + 1 %>" class="carousel-item max-w-md">
+            <div id="item<%= index + 1 %>" class="carousel-item w-full flex justify-center">
                 <%= image_tag image.url, class: 'max-w-full max-h-[30rem] object-contain mx-auto rounded shadow-lg' %>
             </div>
         <% end %>
