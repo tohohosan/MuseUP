@@ -30,10 +30,16 @@
 <div class="text-lg my-6">
     <div class="font-bold mb-4">投稿したユーザー</div>
     <div class="flex items-center">
-        <%= image_tag @museum.user.image, class: 'w-10 h-10 rounded-full mr-2' %>
+        <%= image_tag @museum.user.image, class: 'w-10 h-10 rounded-full mr-2 mb-4' %>
         <span><%= @museum.user.name %></span>
     </div>
 </div>
+
+<% if current_user == @museum.user %>
+    <div class="my-4">
+        <%= link_to '編集', edit_museum_path(@museum), class: "btn btn-primary w-full" %>
+    </div>
+<% end %>
 
 <%= javascript_include_tag 'museum_map', type: 'module', defer: true %> <!-- museum_map.jsを読み込み -->
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap" async defer></script>

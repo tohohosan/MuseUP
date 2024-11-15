@@ -1,0 +1,65 @@
+<div class="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-md space-y-4">
+    <%= form_with model: @museum, local: true do |f| %>
+    <h2 class="text-2xl font-semibold text-center mb-4 border-b-2">ミュージアム編集</h2>
+
+        <div class="mt-8">
+            <%= f.label :name, "ミュージアム名" %>
+            <%= f.text_field :name, id: "Name", class: "input input-bordered w-full" %>
+        </div>
+
+        <div class="mt-4">
+            <%= f.label :address, "住所" %>
+            <%= f.text_field :address, id: "Address", class: "input input-bordered w-full" %>
+        </div>
+
+        <div class="mt-4">
+            <%= f.label :description, "説明 (500 字以内)" %>
+            <%= f.text_area :description, id: "Description", class: "input input-bordered w-full" %>
+        </div>
+
+        <div class="mt-4">
+            <%= f.label :url, "URL" %>
+            <%= f.text_field :url, id: "Url", class: "input input-bordered w-full" %>
+        </div>
+
+        <div class="mt-4">
+            <%= f.label :categories, "カテゴリ" %>
+            <div class="grid grid-cols-3 gap-2 mt-2">
+                <% @categories.each do |category| %>
+                    <label class="btn-category">
+                        <%= f.check_box :category_ids, { multiple: true, class: "mr-2" }, category.id, nil %>
+                        <span><%= category.name %></span>
+                    </label>
+                <% end %>
+            </div>
+                <small class="text-gray-500">最低でも 1 つ以上選択してください</small>
+        </div>
+
+        <div class="mt-8">
+            <%= f.label :images, "画像アップロード" %>
+            <div class="mt-1">
+                <% if @museum.images.attached? %>
+                    <div class="grid grid-cols-2 gap-2 my-4">
+                        <% @museum.images.each do |image| %>
+                            <div class="flex items-center space-x-2">
+                                <%= image_tag image.variant(resize_to_limit: [150, 150]), alt: "Uploaded image", class: "rounded-md shadow w-28 h-28 object-cover" %>
+                                <%= link_to "削除", remove_image_museum_path(@museum, image.id), method: :delete, class: "btn btn-xs btn-error" %>
+                            </div>
+                        <% end %>
+                    </div>
+                <% end %>
+                <%= f.file_field :images, multiple: true, class: "file-input file-input-bordered w-full max-w-xs mt-4" %>
+            </div>
+                <small class="text-gray-500">最大 4 枚までアップロードできます</small>
+        </div>
+
+        <div class="mt-8">
+            <%= f.submit "更新", class: "btn btn-primary w-full" %>
+        </div>
+
+        <div class="mt-4 text-center">
+            <%= link_to "戻る", museum_path(@museum), class: "text-blue-500 hover:text-blue-700" %><br />
+        </div>
+    <% end %>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&libraries=places&callback=initialize&language=ja"></script>

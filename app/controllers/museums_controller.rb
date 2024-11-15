@@ -1,6 +1,7 @@
 class MuseumsController < ApplicationController
     before_action :authenticate_user!, except: [ :index ]
     before_action :set_museum, only: [ :show, :edit, :update, :destroy ]
+    before_action :authorize_user!, only: [ :edit, :update, :destroy ]
 
     def index
         @museums = Museum.all
@@ -35,6 +36,7 @@ class MuseumsController < ApplicationController
     end
 
     def edit
+        @museum = Museum.find(params[:id])
         @categories = Category.all
     end
 
@@ -43,7 +45,8 @@ class MuseumsController < ApplicationController
             redirect_to @museum, notice: "ミュージアム情報が更新されました。"
         else
             @categories = Category.all
-            render :edit
+            flash.now[:alert] = "ミュージアムの更新に失敗しました。"
+            render :edit, status: :unprocessable_entity
         end
     end
 
@@ -60,5 +63,18 @@ class MuseumsController < ApplicationController
 
     def museum_params
         params.require(:museum).permit(:name, :address, :description, :url, images: [], category_ids: [])
+    end
+
+    def authorize_user!
+        unless @museum.user == current_user
+            redirect_to museums_path, alert: "このミュージアムを更新する権限がありません。"
+        end
+    end
+
+    def remove_image
+        @museum = Museum.find(params[:id])
+        image = @museum.images.find(params[:image_id])
+        image.purge # ActiveStorage の画像を削除
+        redirect_to edit_museum_path(@museum), notice: "画像を削除しました。"
     end
 end
