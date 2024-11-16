@@ -41,11 +41,18 @@ class MuseumsController < ApplicationController
     end
 
     def update
-        if @museum.update(museum_params)
+        # 新しい画像がある場合は追加、既存の画像を保持
+        if params[:museum][:images]
+            params[:museum][:images].each do |new_image|
+                @museum.images.attach(new_image)
+            end
+        end
+
+        if @museum.update(museum_params.except(:images))
             redirect_to @museum, notice: "ミュージアム情報が更新されました。"
         else
             @categories = Category.all
-            flash.now[:alert] = "ミュージアムの更新に失敗しました。"
+            flash.now[:alert] = @museum.errors.full_messages.to_sentence
             render :edit, status: :unprocessable_entity
         end
     end
@@ -53,6 +60,20 @@ class MuseumsController < ApplicationController
     def destroy
         @museum.destroy
         redirect_to museums_path, notice: "ミュージアムが削除されました。"
+    end
+
+    def remove_image
+        @museum = Museum.find(params[:id])
+        image = @museum.images.find_by(id: params[:image_id])
+
+        if image.present?
+            image.purge
+            flash[:notice] = "画像が削除されました。"
+        else
+            flash[:alert] = "画像が見つかりませんでした。"
+        end
+
+        redirect_to edit_museum_path(@museum)
     end
 
     private
@@ -69,12 +90,5 @@ class MuseumsController < ApplicationController
         unless @museum.user == current_user
             redirect_to museums_path, alert: "このミュージアムを更新する権限がありません。"
         end
-    end
-
-    def remove_image
-        @museum = Museum.find(params[:id])
-        image = @museum.images.find(params[:image_id])
-        image.purge # ActiveStorage の画像を削除
-        redirect_to edit_museum_path(@museum), notice: "画像を削除しました。"
     end
 end
