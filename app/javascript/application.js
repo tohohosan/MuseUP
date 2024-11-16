@@ -4,4 +4,9 @@ import "controllers"
 
 import './place_autocomplete.js'
 import { initMap } from "museums_map";
+
 window.initMap = initMap;
+
+// Rails UJS の読み込み
+import Rails from "@rails/ujs";
+Rails.start();
