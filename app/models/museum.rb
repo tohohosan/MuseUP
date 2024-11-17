@@ -3,6 +3,7 @@ class Museum < ApplicationRecord
   has_many :reviews
   has_many :museum_categories, dependent: :destroy
   has_many :categories, through: :museum_categories
+  has_many :notes, dependent: :destroy
   has_many_attached :images
 
   geocoded_by :address

@@ -1,0 +1,20 @@
+<% if user_signed_in? %>
+  <% if @note.present? %>
+    <div class="p-4 border rounded shadow">
+      <p><strong>メモ内容:</strong></p>
+      <p><%= @note.content %></p>
+    </div>
+
+    <div class="my-6">
+      <%= link_to "編集", edit_museum_note_path(@museum), class: "btn btn-primary w-full" %>
+    </div>
+    <div class="my-6">
+      <%= button_to "削除", museum_note_path(@museum), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger w-full" %>
+    </div>
+  <% else %>
+    <p>メモがまだ作成されていません。</p>
+    <%= link_to "メモを作成", new_museum_note_path(@museum), class: "btn btn-primary w-full mt-4" %>
+  <% end %>
+<% else %>
+    <p class="text-red-500">メモを作成するにはログインが必要です。</p>
+<% end %>

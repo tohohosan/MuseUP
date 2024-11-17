@@ -1,0 +1,29 @@
+<% if @reviews.present? %>
+    <% @reviews.each do |review| %>
+        <div class="p-4 border rounded shadow">
+            <div class="flex items-center mb-2">
+                <%= image_tag review.user.image, class: 'w-10 h-10 rounded-full mr-2 mb-4' %>
+                <span class="font-semibold"><%= review.user.name %></span>
+            </div>
+
+            <div class ="flex items-center mb-2">
+                <p class="mr-4 text-gray-600 text-sm">おすすめ度: <%= review.rating %> / 5</p>
+                <div class="rating ml-4">
+                    <% (1..5).each do |star| %>
+                        <input type="radio" class="mask mask-star-2 bg-orange-400" disabled <%= "checked" if star <= review.rating %> />
+                    <% end %>
+                </div>
+            </div>
+
+            <p class="text-gray-700 mt-8 mb-4"><%= review.content %></p>
+        </div>
+    <% end %>
+<% else %>
+    <p class="text-gray-500">まだレビューが投稿されていません。</p>
+<% end %>
+
+<% if user_signed_in? %>
+    <%= link_to "レビューを投稿する", new_museum_review_path(@museum), class: "btn btn-primary w-full mt-4" %>
+<% else %>
+    <p class="text-red-500">レビューを投稿するにはログインが必要です。</p>
+<% end %>
