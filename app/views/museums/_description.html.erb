@@ -2,10 +2,11 @@
     <div class="font-bold mt-6">カテゴリ</div>
     <div class="flex flex-wrap gap-4">
         <% @museum.categories.each do |category| %>
-            <span class="badge">
+            <div class="badge badge-primary">
                 <%= category.name %>
-            </span>
+            </div>
         <% end %>
+    </div>
 </div>
 
 <div class="text-lg my-8">

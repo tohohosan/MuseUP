@@ -1,0 +1,41 @@
+<div class="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-md space-y-4">
+    <% if @review.present? && @review.errors.any? %>
+        <div class="alert alert-error" style="background-color: rgba(248, 84, 76, 0.4);">
+        <h2><%= pluralize(@review.errors.count, "エラー") %>が発生しました:</h2>
+        <ul>
+            <% @review.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+        </div>
+    <% end %>
+
+    <%= form_with(model: [@museum, @review], local: true) do |form| %>
+        <h2 class="text-2xl font-semibold text-center mb-4 border-b-2">レビュー投稿</h2>
+
+        <div class="my-8">
+            <%= form.label :content, "レビュー内容", class: "block font-semibold" %>
+            <%= form.text_area :content, rows: 5, class: "input input-bordered w-full" %>
+        </div>
+
+        <div class="mb-8">
+            <%= form.label :rating, "おすすめ度（1〜5）", class: "block font-semibold" %>
+            <div class="rating">
+                <% (1..5).each do |star| %>
+                    <label for="star-<%= star %>" class="cursor-pointer">
+                        <input type="radio" name="review[rating]" value="<%= star %>"
+                            id="star-<%= star %>" class="mask mask-star-2 bg-orange-400" <%= "checked" if star == 1 %>>
+                    </label>
+                            <% end %>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <%= form.submit "保存", class: "btn btn-primary w-full" %>
+        </div>
+
+        <div class="mt-4 text-center">
+            <%= link_to "戻る", museum_path(@museum), class: "text-blue-500 hover:text-blue-700" %><br />
+        </div>
+    <% end %>
+</div>

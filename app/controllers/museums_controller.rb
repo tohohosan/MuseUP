@@ -1,5 +1,5 @@
 class MuseumsController < ApplicationController
-    before_action :authenticate_user!, except: [ :index ]
+    before_action :authenticate_user!, except: [ :index, :show ]
     before_action :set_museum, only: [ :show, :edit, :update, :destroy ]
     before_action :authorize_user!, only: [ :edit, :update, :destroy ]
 
@@ -11,6 +11,8 @@ class MuseumsController < ApplicationController
 
     def show
         @museum = Museum.find(params[:id])
+        @reviews = @museum.reviews.includes(:user)
+        @note = @museum.notes.find_by(user: current_user) if user_signed_in?
         respond_to do |format|
             format.html
             format.json { render json: @museum }
