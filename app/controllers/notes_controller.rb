@@ -14,7 +14,7 @@ class NotesController < ApplicationController
     def create
         @note = @museum.notes.find_or_initialize_by(user: current_user)
         if @note.update(note_params)
-            redirect_to @museum, notice: "メモを保存しました。"
+            redirect_to determine_redirect_path, notice: "メモを保存しました。"
         else
             render :new, status: :unprocessable_entity
         end
@@ -25,7 +25,7 @@ class NotesController < ApplicationController
 
     def update
         if @note.update(note_params)
-            redirect_to @museum, notice: "メモを更新しました。"
+            redirect_to determine_redirect_path, notice: "メモを更新しました。"
         else
             render :edit, status: :unprocessable_entity
         end
@@ -33,7 +33,7 @@ class NotesController < ApplicationController
 
     def destroy
         @note.destroy
-        redirect_to @museum, notice: "メモを削除しました。"
+        redirect_to determine_redirect_path, notice: "メモを削除しました。"
     end
 
     private
@@ -48,5 +48,15 @@ class NotesController < ApplicationController
 
     def note_params
         params.require(:note).permit(:content)
+    end
+
+    def determine_redirect_path
+        if request.referer&.include?(museum_path(@museum))
+            museum_path(@museum) # ミュージアム詳細画面
+        elsif request.referer&.include?(notes_user_path(current_user))
+            notes_user_path(current_user) # マイページのメモ画面
+        else
+            museum_path(@museum) # デフォルトはミュージアム詳細画面
+        end
     end
 end

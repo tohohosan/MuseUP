@@ -10,7 +10,7 @@
         <ul class="dropdown-content menu flex-col p-2 shadow bg-base-100 rounded-box">
           <li><%= link_to "マイページ", user_path(current_user) %></li>
           <li><%= link_to "リスト", "#" %></li>
-          <li><%= link_to "メモ", "#" %></li>
+          <li><%= link_to "メモ", user_notes_path(current_user) %></li>
         </ul>
       </div>
       <div class="text-lg font-bold text-center flex-1">

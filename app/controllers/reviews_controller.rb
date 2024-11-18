@@ -17,10 +17,10 @@ class ReviewsController < ApplicationController
         @review.user = current_user
 
         if @review.save
-            redirect_to museum_reviews_path(@museum), notice: "レビューが投稿されました。"
+            redirect_to @museum, notice: "レビューが投稿されました。"
         else
             flash.now[:alert] = @review.errors.full_messages.to_sentence
-            render :index, status: :unprocessable_entity
+            render :new, status: :unprocessable_entity
         end
     end
 
@@ -29,7 +29,7 @@ class ReviewsController < ApplicationController
     # レビューの更新
     def update
         if @review.update(review_params)
-            redirect_to museum_reviews_path(@museum), notice: "レビューが更新されました。"
+            redirect_to @museum, notice: "レビューが更新されました。"
         else
             flash.now[:alert] = @review.errors.full_messages.to_sentence
             render :edit, status: :unprocessable_entity
@@ -39,7 +39,7 @@ class ReviewsController < ApplicationController
     # レビューの削除
     def destroy
         @review.destroy
-        redirect_to museum_reviews_path(@museum), notice: "レビューが削除されました。"
+        redirect_to @museum, notice: "レビューが削除されました。"
     end
 
     private
