@@ -6,9 +6,13 @@
                 <span class="font-semibold"><%= review.user.name %></span>
             </div>
 
-            <div class ="flex items-center mb-2">
-                <p class="mr-4 text-gray-600 text-sm">おすすめ度: <%= review.rating %> / 5</p>
-                <div class="rating ml-4">
+            <div class="text-gray-600 text-sm">
+                投稿日時: <%= l(review.created_at, format: :short) %>
+            </div>
+
+            <div class ="mb-2">
+                <p class="text-gray-600 text-sm">おすすめ度: <%= review.rating %> / 5</p>
+                <div class="rating">
                     <% (1..5).each do |star| %>
                         <input type="radio" class="mask mask-star-2 bg-orange-400" disabled <%= "checked" if star <= review.rating %> />
                     <% end %>
@@ -16,6 +20,13 @@
             </div>
 
             <p class="text-gray-700 mt-8 mb-4"><%= review.content %></p>
+
+            <% if review.user == current_user %>
+                <div class="mt-4 flex space-x-2">
+                    <%= link_to "編集", edit_museum_review_path(@museum, review), class: "btn btn-secondary" %>
+                    <%= button_to "削除", museum_review_path(@museum, review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+                </div>
+            <% end %>
         </div>
     <% end %>
 <% else %>
@@ -25,5 +36,5 @@
 <% if user_signed_in? %>
     <%= link_to "レビューを投稿する", new_museum_review_path(@museum), class: "btn btn-primary w-full mt-4" %>
 <% else %>
-    <p class="text-red-500">レビューを投稿するにはログインが必要です。</p>
+    <p class="text-red-500 mt-4">レビューを投稿するにはログインが必要です。</p>
 <% end %>
