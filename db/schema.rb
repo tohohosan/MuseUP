@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_08_124459) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_19_055847) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,6 +46,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_124459) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "list_museums", force: :cascade do |t|
+    t.bigint "list_id", null: false
+    t.bigint "museum_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_list_museums_on_list_id"
+    t.index ["museum_id"], name: "index_list_museums_on_museum_id"
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "default", default: false, null: false
+    t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
   create_table "museum_categories", force: :cascade do |t|
@@ -112,6 +130,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_124459) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "list_museums", "lists"
+  add_foreign_key "list_museums", "museums"
+  add_foreign_key "lists", "users"
   add_foreign_key "museum_categories", "categories"
   add_foreign_key "museum_categories", "museums"
   add_foreign_key "museums", "users"

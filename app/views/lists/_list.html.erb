@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+    <% @lists.each do |list| %>
+        <div class="p-4 border rounded shadow">
+            <%= link_to list.name, list_path(list) %>
+            <% unless list.default? %>
+                <div class="mt-4 flex space-x-2">
+                    <%= link_to "編集", edit_list_path(list), class: "btn btn-secondary" %>
+                    <%= link_to '削除', list_path(list), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+    <%= link_to 'リストを作成する', new_list_path(museum_id: @museum.id), class: 'btn btn-primary w-full mt-4' %>
+<% else %>
+    <p class="text-red-500 mt-4">レビューを投稿するにはログインが必要です。</p>
+<% end %>
+
