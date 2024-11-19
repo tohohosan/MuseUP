@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     resources :notes
   end
 
+  resources :lists
+
   resources :users, only: [] do
     get "notes", to: "users#notes", as: :notes
   end

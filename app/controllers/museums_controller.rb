@@ -12,6 +12,7 @@ class MuseumsController < ApplicationController
     def show
         @museum = Museum.find(params[:id])
         @reviews = @museum.reviews.includes(:user)
+        @lists = current_user.lists
         @note = @museum.notes.find_by(user: current_user) if user_signed_in?
         respond_to do |format|
             format.html

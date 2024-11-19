@@ -1,10 +1,13 @@
 class Museum < ApplicationRecord
   belongs_to :user
-  has_many :reviews
   has_many :museum_categories, dependent: :destroy
   has_many :categories, through: :museum_categories
-  has_many :notes, dependent: :destroy
   has_many_attached :images
+
+  has_many :reviews
+  has_many :list_museums, dependent: :destroy
+  has_many :lists, through: :list_museums
+  has_many :notes, dependent: :destroy
 
   geocoded_by :address
   after_validation :geocode
