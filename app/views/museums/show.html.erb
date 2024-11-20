@@ -63,7 +63,7 @@
                 <%= render 'reviews/review' %>
             </div>
             <div role="tabpanel" class="tab-content p-6" data-content="3">
-                <%= render 'lists/list' %>
+                <%= render partial: 'lists/list', collection: @lists, as: :list %>
             </div>
             <div role="tabpanel" class="tab-content p-6" data-content="4">
                 <%= render 'notes/note' %>
