@@ -20,7 +20,12 @@ Rails.application.routes.draw do
     resources :notes
   end
 
-  resources :lists
+  resources :lists do
+    member do
+      post :add_museum
+      delete :remove_museum
+    end
+  end
 
   resources :users, only: [] do
     get "notes", to: "users#notes", as: :notes

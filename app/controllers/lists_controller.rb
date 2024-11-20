@@ -3,7 +3,8 @@ class ListsController < ApplicationController
     before_action :set_list, only: [ :show, :edit, :update, :destroy, :add_museum ]
 
     def index
-        @lists = current_user.lists
+        @lists = current_user.lists.includes(:museums)
+        @list_museums_counts = @lists.map { |list| [ list.id, list.museums.size ] }.to_h
     end
 
     def show
@@ -60,6 +61,17 @@ class ListsController < ApplicationController
             @list.museums << museum
         end
         redirect_back fallback_location: museum_path(museum), notice: "リストに追加しました。"
+    end
+
+    def remove_museum
+        museum = Museum.find(params[:museum_id])
+        if @list.museums.include?(museum)
+            @list.museums.delete(museum)
+            flash[:notice] = "リストから削除しました。"
+        else
+            flash[:alert] = "指定された博物館はリストに登録されていません。"
+        end
+        redirect_back fallback_location: museum_path(museum)
     end
 
     private
