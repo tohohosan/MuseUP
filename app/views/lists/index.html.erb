@@ -1,0 +1,5 @@
+<div class="p-6 w-1/2 mx-auto bg-white rounded-xl shadow-md space-y-2">
+    <h2 class="text-2xl font-semibold text-center mb-4 border-b-2"><%= current_user.name %>のリスト一覧</h2>
+    <%= render @lists %>
+    <%= link_to 'リストを作成する', new_list_path, class: 'btn btn-primary w-full mt-4' %>
+</div>

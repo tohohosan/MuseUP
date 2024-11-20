@@ -9,7 +9,7 @@
         </button>
         <ul class="dropdown-content menu flex-col p-2 shadow bg-base-100 rounded-box">
           <li><%= link_to "マイページ", user_path(current_user) %></li>
-          <li><%= link_to "リスト", "#" %></li>
+          <li><%= link_to "リスト", lists_path %></li>
           <li><%= link_to "メモ", user_notes_path(current_user) %></li>
         </ul>
       </div>

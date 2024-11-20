@@ -1,5 +1,5 @@
 <div class="p-6 w-1/2 mx-auto bg-white rounded-xl shadow-md space-y-4">
-    <h1 class="text-2xl font-bold mb-4"><%= current_user.name %>のメモ一覧</h1>
+    <h1 class="text-2xl font-semibold text-center mb-4 border-b-2"><%= current_user.name %>のメモ一覧</h1>
 
     <% if @notes.present? %>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

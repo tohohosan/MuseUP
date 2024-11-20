@@ -1,26 +1,19 @@
 class ListsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_list, only: [ :show, :edit, :update, :destroy, :add_museum ]
+    before_action :set_list, only: [ :show, :edit, :update, :destroy, :add_museum, :remove_museum ]
 
     def index
         @lists = current_user.lists.includes(:museums)
+        @museum = Museum.find(params[:museum_id]) if params[:museum_id].present?
         @list_museums_counts = @lists.map { |list| [ list.id, list.museums.size ] }.to_h
     end
 
     def show
-        @museums = @list.museums
-        @museum_data = @museums.select(:id, :name, :latitude, :longitude).to_json
+        @list = List.find(params[:id])
+        @museums = @list.museums.includes(images_attachments: :blob)
     end
 
     def new
-        if params[:museum_id].present?
-            begin
-                @museum = Museum.find(params[:museum_id])
-            rescue ActiveRecord::RecordNotFound
-                flash.now[:alert] = "指定された博物館が見つかりませんでした。"
-                @museum = nil
-            end
-        end
         @list = List.new
     end
 
