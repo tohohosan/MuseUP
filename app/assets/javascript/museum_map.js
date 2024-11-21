@@ -1,5 +1,7 @@
 function initMap() {
   const mapElement = document.getElementById('map');
+  if (!mapElement) return; // マップ要素が存在しない場合は終了
+
   const mapOptions = {
     center: { lat: 35.14315728478154, lng: 136.91635162137968 },
     zoom: 7
@@ -8,6 +10,8 @@ function initMap() {
 
   // ミュージアムデータを取得
   const museumDataElement = document.getElementById('museum-data');
+  if (!museumDataElement) return; // データ要素が存在しない場合は終了
+
   const museums = JSON.parse(museumDataElement.textContent);
 
   // ミュージアムごとにマーカーを追加
