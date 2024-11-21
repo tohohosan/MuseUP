@@ -59,14 +59,25 @@
             <div role="tabpanel" class="tab-content p-6" data-content="1">
                 <%= render 'museums/description' %>
             </div>
+
             <div role="tabpanel" class="tab-content p-6" data-content="2">
                 <%= render 'reviews/review' %>
             </div>
+
             <div role="tabpanel" class="tab-content p-6" data-content="3">
-                <%= render partial: 'lists/list', collection: @lists, as: :list %>
+                <% if user_signed_in? %>
+                    <%= render partial: "lists/list", collection: @lists, as: :list %>
+                <% else %>
+                    <p class="text-red-500 mt-4">リスト機能を使うにはログインが必要です。</p>
+                <% end %>
             </div>
+
             <div role="tabpanel" class="tab-content p-6" data-content="4">
-                <%= render 'notes/note' %>
+                <% if user_signed_in? %>
+                    <%= render 'notes/note' %>
+                <% else %>
+                    <p class="text-red-500 mt-4">メモを作成するにはログインが必要です。</p>
+                <% end %>
             </div>
         </div>
     </div>

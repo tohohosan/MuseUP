@@ -1,27 +1,22 @@
-<% if user_signed_in? %>
-    <div class="p-4 border rounded shadow flex justify-between items-center">
-        <div class="flex-1 ml-2 my-4">
-            <%= link_to list.name, list_path(list), class: "font-bold text-gray-700" %>
-            <div class="text-gray-400 text-sm mt-2">
-                <%= @list_museums_counts[list.id] || 0 %> ヶ所登録済み
-            </div>
+<div class="p-4 border rounded shadow flex justify-between items-center">
+    <div class="flex-1 ml-2 my-4">
+        <%= link_to list.name, list_path(list), class: "font-bold text-gray-700" %>
+        <div class="text-gray-400 text-sm mt-2">
+            <%= @list_museums_counts[list.id] || 0 %> ヶ所登録済み
         </div>
-
-        <% if @museum.present? %>
-            <div class="mr-2 my-4">
-                <% unless list.museums.include?(@museum) %>
-                    <%= button_to "登録する", add_museum_list_path(list, museum_id: @museum.id),
-                            method: :post,
-                            class: "btn btn-sm" %>
-                <% else %>
-                    <%= button_to "登録解除", remove_museum_list_path(list, museum_id: @museum.id),
-                            method: :delete,
-                            class: "btn btn-sm" %>
-                <% end %>
-            </div>
-        <% end %>
     </div>
-<% else %>
-    <p class="text-red-500 mt-4">リスト機能を使うにはログインが必要です。</p>
-<% end %>
 
+    <% if @museum.present? %>
+        <div class="mr-2 my-4">
+            <% unless list.museums.include?(@museum) %>
+                <%= button_to "登録する", add_museum_list_path(list, museum_id: @museum.id),
+                        method: :post,
+                        class: "btn btn-sm" %>
+            <% else %>
+                <%= button_to "登録解除", remove_museum_list_path(list, museum_id: @museum.id),
+                        method: :delete,
+                        class: "btn btn-sm" %>
+            <% end %>
+        </div>
+    <% end %>
+</div>
