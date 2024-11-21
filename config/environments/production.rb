@@ -9,7 +9,6 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   config.assets.compile = false
-  config.assets.precompile += %w[museum_map.js place_autocomplete.js]
 
   config.active_storage.service = :amazon
 
@@ -21,7 +20,7 @@ Rails.application.configure do
 
   config.log_tags = [ :request_id ]
 
-  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
+  config.log_level = :debug # ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   config.action_mailer.perform_caching = false
 

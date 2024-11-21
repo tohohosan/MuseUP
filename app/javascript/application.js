@@ -3,7 +3,6 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 import './place_autocomplete.js';
-import './museum_map';
 
 // Rails UJS の読み込み
 import Rails from "@rails/ujs";
