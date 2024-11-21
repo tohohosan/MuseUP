@@ -3,3 +3,4 @@
 //= link_tree ../../../vendor/javascript .js
 //= link_tree ../builds
 //= link museum_map.js
+//= link place_autocomplete.js
