@@ -8,7 +8,6 @@ Rails.application.configure do
   config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
-  config.assets.js_compressor = :uglifier
   config.assets.compile = false
   config.assets.precompile += %w[museum_map.js place_autocomplete.js]
 
