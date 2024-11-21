@@ -3,9 +3,7 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 import './place_autocomplete.js';
-import { initMap } from "museums_map";
-
-window.initMap = initMap;
+import './museums_map';
 
 // Rails UJS の読み込み
 import Rails from "@rails/ujs";
