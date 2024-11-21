@@ -37,7 +37,13 @@
 <div class="text-lg my-6">
     <div class="font-bold mb-4">投稿したユーザー</div>
     <div class="flex items-center">
-        <%= image_tag @museum.user.image, class: 'w-10 h-10 rounded-full mr-2 mb-4' %>
+        <% if @museum.user.image&.attached? %>
+            <div class="rounded-full">
+                <%= image_tag @museum.user.image, class: 'w-10 h-10 rounded-full mr-2 mb-4' %>
+            </div>
+        <% else %>
+            <div class="w-10 h-10 rounded-full bg-gray-300 mr-2 mb-4"></div>
+        <% end %>
         <span><%= @museum.user.name %></span>
     </div>
 </div>

@@ -12,9 +12,17 @@ class MuseumsController < ApplicationController
     def show
         @museum = Museum.find(params[:id])
         @reviews = @museum.reviews.includes(:user)
-        @lists = current_user.lists.includes(:museums)
-        @list_museums_counts = @lists.map { |list| [ list.id, list.museums.size ] }.to_h
-        @note = @museum.notes.find_by(user: current_user) if user_signed_in?
+
+        if user_signed_in?
+            @lists = current_user.lists.includes(:museums)
+            @list_museums_counts = @lists.map { |list| [ list.id, list.museums.size ] }.to_h
+            @note = @museum.notes.find_by(user: current_user)
+        else
+            @lists = nil
+            @list_museums_counts = nil
+            @note = nil
+        end
+
         respond_to do |format|
             format.html
             format.json { render json: @museum }
