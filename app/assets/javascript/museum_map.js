@@ -32,4 +32,5 @@ function initMap() {
   });
 }
 
-export { initMap };
+// グローバルスコープに登録
+window.initMap = initMap;
