@@ -5,6 +5,7 @@ class MuseumsController < ApplicationController
 
     def index
         @museums = Museum.all
+
         @total_museum_count = @museums.count
         @user_museum_count = current_user.museums.count if user_signed_in?
     end

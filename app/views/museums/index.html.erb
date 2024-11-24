@@ -80,13 +80,12 @@
 </script>
 
 <dialog id="searchModal" class="modal">
-  <div class="modal-box">
-    <h3 class="text-lg font-bold">検索</h3>
+  <div class="modal-box space-y-4">
 
-    <%= render 'shared/search_form' %>
+    <%= render 'museums/search_form' %>
 
     <div class="modal-action">
-      <button class="btn" onclick="searchModal.close()">閉じる</button>
+      <button class="btn btn-outline" onclick="searchModal.close()">閉じる</button>
     </div>
   </div>
 </dialog>

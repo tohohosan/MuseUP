@@ -15,7 +15,12 @@
                             </div>
                         <% end %>
                         <div>
-                            <h4 class="text-lg font-bold"><%= museum.name %></h4>
+                            <div class="text-lg font-bold"><%= museum.name %></div>
+                            <div class="space-x-2">
+                                <% museum.categories.each do |category| %>
+                                    <span class="badge badge-primary"><%= category.name %></span>
+                                <% end %>
+                            </div>
                             <div class="text-gray-500"><%= museum.address %></div>
                             <%= link_to '詳細を見る', museum_path(museum), class: "text-blue-500 text-sm" %>
                         </div>
