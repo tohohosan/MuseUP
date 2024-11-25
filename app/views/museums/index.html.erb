@@ -36,9 +36,10 @@
     const mapElement = document.getElementById('map');
     if (!mapElement) return; // マップ要素が存在しない場合は終了
 
+    const center = <%= raw @map_center.to_json %>;
     const mapOptions = {
-      center: { lat: 35.778429, lng: 136.815916 },
-      zoom: 7
+      center: center,
+      zoom: 7.5
     };
     const map = new google.maps.Map(mapElement, mapOptions);
 
@@ -48,34 +49,30 @@
 
     const museums = JSON.parse(museumDataElement.textContent);
 
-    // ミュージアムごとにマーカーを追加
-    museums.forEach((museum) => {
-      const marker = new google.maps.Marker({
-        position: { lat: museum.latitude, lng: museum.longitude },
-        map: map,
-        title: museum.name
-      });
+    // 検索結果がある場合、マーカーを追加
+    if (museums.length > 0) {
+      museums.forEach((museum) => {
+        const marker = new google.maps.Marker({
+          position: { lat: museum.latitude, lng: museum.longitude },
+          map: map,
+          title: museum.name
+        });
 
       marker.addListener('click', function() {
         fetch(`/museums/${museum.id}.json`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Failed to fetch museum details.');
-            }
-            return response.json();
-          })
+          .then(response => response.json())
           .then(data => {
             document.getElementById('museumTitle').innerText = data.name;
             document.getElementById('museumDescription').innerText = data.description;
             document.getElementById('museumDetailLink').href = `/museums/${museum.id}`;
             document.getElementById('museumDetailModal').showModal();
           })
-          .catch(error => {
-            alert('ミュージアムの詳細を取得できませんでした。');
-            console.error('Error fetching museum details:', error);
-        });
+          .catch(error => console.error('Error fetching museum details:', error));
       });
     });
+  } else {
+      alert('該当するミュージアムがありません。地図の中心を初期位置に設定しました。');
+    }
   }
 </script>
 

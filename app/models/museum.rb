@@ -45,4 +45,12 @@ class Museum < ApplicationRecord
     errors.add(:address, "を入力してください")
     end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    super + [ "id", "name", "address" ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    super + [ "categories" ]
+  end
 end
