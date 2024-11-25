@@ -4,10 +4,19 @@ class MuseumsController < ApplicationController
     before_action :authorize_user!, only: [ :edit, :update, :destroy ]
 
     def index
-        @museums = Museum.all
+        # Ransack の検索オブジェクトを作成
+        @q = Museum.ransack(params[:q])
+        # 検索結果を適用（デフォルトはすべてのミュージアム）
+        @museums = @q.result.includes(:categories)
 
-        @total_museum_count = @museums.count
+        @total_museum_count = Museum.count
         @user_museum_count = current_user.museums.count if user_signed_in?
+
+        @map_center = if @museums.present?
+                        { lat: @museums.first.latitude, lng: @museums.first.longitude }
+                    else
+                        { lat: 35.778429, lng: 136.815916 } # デフォルト位置
+        end
     end
 
     def show
