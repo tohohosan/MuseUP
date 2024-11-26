@@ -14,7 +14,7 @@ class MuseumsController < ApplicationController
 
         @map_center = if @museums.present?
                         { lat: @museums.first.latitude, lng: @museums.first.longitude }
-                    else
+        else
                         { lat: 35.778429, lng: 136.815916 } # デフォルト位置
         end
     end
