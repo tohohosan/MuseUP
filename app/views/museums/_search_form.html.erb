@@ -29,7 +29,7 @@
                         <div class="collapse-content">
                             <% prefectures.each do |prefecture| %>
                                 <label class="block py-1">
-                                    <input type="radio" name="search[address]" value="<%= prefecture %>" class="radio radio-primary" <%= "checked" if params[:address] == prefecture %> />
+                                    <%= f.radio_button :address_cont, prefecture, class: "radio radio-primary" %>
                                     <span class="ml-2"><%= prefecture %></span>
                                 </label>
                             <% end %>
