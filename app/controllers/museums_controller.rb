@@ -8,6 +8,8 @@ class MuseumsController < ApplicationController
         @q = Museum.ransack(params[:q])
         # 検索結果を適用（デフォルトはすべてのミュージアム）
         @museums = @q.result.includes(:categories)
+        # 検索結果件数を計算
+        @search_results_count = @museums.count
 
         @total_museum_count = Museum.count
         @user_museum_count = current_user.museums.count if user_signed_in?
