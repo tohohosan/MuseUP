@@ -8,7 +8,11 @@ module.exports = {
     './app/views/**/*.{erb,haml,html,slim}'
   ],
   theme: {
-    extend: {},
+    extend: {
+      maxWidth: {
+        'xl': '550px',
+      },
+    },
     fontFamily: {
       body: [
         "メイリオ"
