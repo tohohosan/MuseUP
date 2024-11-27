@@ -44,8 +44,8 @@
                             <div class="flex items-center space-x-2">
                                 <%= image_tag image.url, class: "rounded-md shadow w-28 h-28 object-cover" %>
                                 <%= link_to "削除", remove_image_museum_path(@museum, image_id: image.id), 
-                                    method: :delete, 
-                                    data: { confirm: "本当にこの画像を削除しますか？", turbo: false }, 
+                                    method: :delete,
+                                    data: { confirm: "本当にこの画像を削除しますか？", turbo: false },
                                     class: "btn btn-danger" %>
                             </div>
                         <% end %>
