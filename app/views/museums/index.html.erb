@@ -135,6 +135,7 @@
           lng: position.coords.longitude,
         };
         fetchNearestMuseum(userLocation);
+        document.getElementById("searchModal").close();
       },
       (error) => {
         alert("現在地を取得できませんでした: " + error.message);
