@@ -16,6 +16,10 @@ Rails.application.routes.draw do
       delete :remove_image
     end
 
+    collection do
+      get :nearest
+    end
+
     resources :reviews
     resources :notes
   end

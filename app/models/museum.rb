@@ -10,7 +10,7 @@ class Museum < ApplicationRecord
   has_many :notes, dependent: :destroy
 
   geocoded_by :address
-  after_validation :geocode
+  after_validation :geocode, if: :will_save_change_to_address?
 
   validates :name, :address, :description, presence: true
   validates :categories, presence: { message: "を少なくとも1つ選択してください" }
