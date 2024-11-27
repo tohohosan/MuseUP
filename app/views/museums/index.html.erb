@@ -38,9 +38,10 @@
 
 <div id="map" style="height: 1000px;"></div>
 
+<!-- ミュージアムの一覧と Ransack での検索結果の表示 -->
 <script>
   function initMap() {
-    const mapElement = document.getElementById('map');
+    const mapElement = document.getElementById("map");
     if (!mapElement) return; // マップ要素が存在しない場合は終了
 
     const center = <%= raw @map_center.to_json %>;
@@ -54,35 +55,95 @@
     const museumDataElement = document.getElementById('museum-data');
     if (!museumDataElement) return; // データ要素が存在しない場合は終了
 
-    const museums = JSON.parse(museumDataElement.textContent);
+    const museums = JSON.parse(museumDataElement.textContent)
 
     // 検索結果がある場合、マーカーを追加
     if (museums.length > 0) {
-      museums.forEach((museum) => {
-        const marker = new google.maps.Marker({
-          position: { lat: museum.latitude, lng: museum.longitude },
-          map: map,
-          title: museum.name
-        });
-
-      marker.addListener('click', function() {
-        fetch(`/museums/${museum.id}.json`)
-          .then(response => response.json())
-          .then(data => {
-            document.getElementById('museumTitle').innerText = data.name;
-            document.getElementById('museumDescription').innerText = data.description;
-            document.getElementById('museumDetailLink').href = `/museums/${museum.id}`;
-            document.getElementById('museumDetailModal').showModal();
-          })
-          .catch(error => console.error('Error fetching museum details:', error));
-      });
-    });
-  } else {
-      alert('該当するミュージアムがありません。地図の中心を初期位置に設定しました。');
+      addMarkersToMap(museums, map);
+    } else {
+      alert("該当するミュージアムがありません。地図の中心を初期位置に設定しました。");
     }
   }
+
+  function addMarkersToMap(museums, map) {
+    museums.forEach((museum) => {
+      const marker = new google.maps.Marker({
+        position: { lat: museum.latitude, lng: museum.longitude },
+        map: map,
+        title: museum.name,
+      });
+
+      marker.addListener('click', () => {
+        fetch(`/museums/${museum.id}.json`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data && data.name && data.description) {
+              document.getElementById('museumTitle').innerText = data.name;
+              document.getElementById('museumDescription').innerText = data.description;
+              document.getElementById('museumDetailLink').href = `/museums/${museum.id}`;
+              document.getElementById('museumDetailModal').showModal();
+            } else {
+              console.error("Unexpected data format:", data);
+            }
+          })
+          .catch(error => console.error('Error fetching museum details:', error)
+          );
+      });
+    });
+  }
+
+  function fetchNearestMuseum(userLocation) {
+    fetch(`/museums/nearest?latitude=${userLocation.lat}&longitude=${userLocation.lng}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.museum) {
+          const mapElement = document.getElementById('map');
+          const map = new google.maps.Map(mapElement, {
+            center: userLocation,
+            zoom: 11,
+          });
+
+          // 現在地をマップに追加
+          new google.maps.Marker({
+            position: userLocation,
+            map: map,
+            title: "現在地",
+            icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+          });
+
+          // 最寄りのミュージアムをマップに追加
+          addMarkersToMap([data.museum], map);
+        } else {
+          alert("近くにミュージアムが見つかりませんでした。");
+        }
+      })
+    .catch((error) => {
+      console.error("エラーが発生しました:", error);
+    });
+  }
+
+  document.getElementById("location-search-btn").addEventListener("click", () => {
+    if (!navigator.geolocation) {
+      alert("お使いのブラウザは位置情報をサポートしていません。");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const userLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        fetchNearestMuseum(userLocation);
+      },
+      (error) => {
+        alert("現在地を取得できませんでした: " + error.message);
+      }
+    );
+  });
 </script>
 
+<!-- 検索モーダルの表示 -->
 <dialog id="searchModal" class="modal">
   <div class="modal-box space-y-4">
 
@@ -94,6 +155,7 @@
   </div>
 </dialog>
 
+<!-- ミュージアム概要モーダルの表示 -->
 <dialog id="museumDetailModal" class="modal">
   <div class="modal-box">
     <h3 id="museumTitle" class="text-lg font-bold">ミュージアム詳細</h3>

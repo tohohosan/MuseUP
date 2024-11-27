@@ -100,6 +100,20 @@ class MuseumsController < ApplicationController
         redirect_to edit_museum_path(@museum)
     end
 
+    def nearest
+        latitude = params[:latitude].to_f
+        longitude = params[:longitude].to_f
+
+        # Geocoder を使って現在地に最も近いミュージアムを検索
+        nearest_museum = Museum.near([ latitude, longitude ], 50).first
+
+        if nearest_museum
+            render json: { museum: nearest_museum }
+        else
+            render json: { museum: nil }
+        end
+    end
+
     private
 
     def set_museum
