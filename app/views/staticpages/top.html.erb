@@ -1,64 +1,50 @@
-<div class="text-center items-center">
+<div class="container mx-auto px-4 lg:px-8 text-center items-center">
 
     <div class="my-10">
         <h1 class="text-2xl font-bold border-b-2">
             ミュージアムをもっと<span class="text-primary font-bold">知る</span>、
             もっと<span class="text-primary font-bold">楽しむ</span>。
         </h1>
-
         <p class="mt-2">
-            MuseUp は、あなたの近くにあるミュージアムを検索したり、投稿したりして、もっとミュージアムを知る・楽しむことができるサービスです。
+            MuseUp (みゅーじあっぷ) は、あなたの近くにあるミュージアムを検索したり、投稿したりして、<br>
+            もっとミュージアムを知る・楽しむことができるサービスです。
         </p>
-
         <div class="mt-5">
-            <%= image_tag 'Art_museum.png', class: 'w-full max-w-md mx-auto rounded-xl shadow-md' %>
+            <%= image_tag 'Art_museum.png', class: 'w-full max-w-lg mx-auto rounded-xl shadow-md' %>
         </div>
     </div>
 
-    <div class="my-8">
-        <%= link_to raw('
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-            </svg>
-            ミュージアムを知る'), museums_path, class: "btn btn-primary items-center space-x-1" %>
-        <p class="mt-2">マップから他のユーザーが投稿したミュージアムを見てみましょう。<br>
-        知らないミュージアムがきっと見つかるはずです。</p>
-        <%= image_tag 'MuseUp-index.png', class: 'w-full max-w-md mx-auto rounded-xl shadow-md' %>
-    </div>
-
-    <div class="my-8">
-        <%= link_to raw('
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
-            ミュージアムを探す'), museums_path, class: "btn btn-primary items-center space-x-1" %>
-        <p class="mt-2">都道府県やカテゴリから、ミュージアムを探すことができます。<br>
-        あなたの現在地から一番近いミュージアムも見つかります。</p>
-        <%= image_tag 'MuseUp-search.png', class: 'w-full max-w-md mx-auto rounded-xl shadow-md' %>
-    </div>
-
-    <div class="my-8">
-        <%= link_to raw('
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-            </svg>
-            ミュージアムを投稿する'), new_museum_path, class: "btn btn-primary items-center space-x-1" %>
-        <p class="mt-2">自分が行ったことのあるミュージアムを投稿することもできます。<br>
-        レビューも投稿して、推しミュージアムを他のユーザーにオススメしましょう！</p>
-        <p class="text-sm text-secondary my-2">ログイン限定の機能です。</p>
-        <%= image_tag 'MuseUp-post.png', class: 'w-full max-w-md mx-auto rounded-xl shadow-md' %>
-    </div>
-
-    <div class="my-8">
-        <%= link_to raw('
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-2">
+        <% blocks = [
+            { title: 'ミュージアムを知る', path: museums_path, description: 'マップから他のユーザーが投稿したミュージアムを見てみましょう。知らないミュージアムがきっと見つかるはずです。', image: 'MuseUp-index.png',
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>' },
+            { title: 'ミュージアムを探す', path: museums_path, description: '都道府県やカテゴリから、ミュージアムを探すことができます。あなたの現在地から一番近いミュージアムも見つかります。', image: 'MuseUp-search.png',
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>' },
+            { title: 'ミュージアムを投稿する', path: new_museum_path, description: '自分が行ったことのあるミュージアムを投稿することもできます。レビューも投稿して、推しミュージアムを他のユーザーにオススメしましょう！', image: 'MuseUp-post.png',
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                    </svg>', note: 'ログイン限定の機能です。' },
+            { title: 'ミュージアムを楽しむ', path: lists_path, description: 'リスト機能を使えば、ミュージアムを自由に管理することができます。また、ミュージアムに対するプライベートなメモを記録することもできます！', image: 'MuseUp-list.png',
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
-            </svg>
-            ミュージアムを楽しむ'), lists_path, class: "btn btn-primary items-center space-x-1" %>
-        <p class="mt-2">リスト機能を使えば、ミュージアムを自由に管理することができます。<br>
-        また、ミュージアムに対するプライベートなメモを記録することもできます！</p>
-        <p class="text-sm text-secondary my-2">ログイン限定の機能です。</p>
-        <%= image_tag 'MuseUp-list.png', class: 'w-full max-w-md mx-auto rounded-xl shadow-md' %>
+                </svg>', note: 'ログイン限定の機能です。' }
+        ] %>
+
+        <% blocks.each do |block| %>
+            <div class="flex flex-col justify-between items-center p-4 border rounded-xl shadow-md bg-white min-h-[288px]">
+                <div class="text-primary mb-4">
+                    <%= raw(block[:icon]) %>
+                </div>
+                <%= link_to block[:title], block[:path], class: 'text-lg font-bold text-primary' %>
+                <p class="mt-2 text-center"><%= block[:description] %></p>
+                <% if block[:note] %>
+                    <p class="text-sm text-secondary mt-2"><%= block[:note] %></p>
+                <% end %>
+                <%= image_tag block[:image], class: 'w-full h-36 object-cover rounded-lg mt-4 shadow-md' %>
+            </div>
+        <% end %>
     </div>
 </div>
