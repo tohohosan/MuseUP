@@ -1,0 +1,13 @@
+<% if params[:reviews_page] %>
+    var reviewsContainer = document.getElementById("reviews-container");
+    if (reviewsContainer) {
+        reviewsContainer.innerHTML = "<%= j render partial: 'museums/reviews' %>";
+    }
+<% end %>
+
+<% if params[:lists_page] %>
+    var listsContainer = document.getElementById("lists-container");
+    if (listsContainer) {
+        listsContainer.innerHTML = "<%= j render partial: 'museums/lists' %>";
+    }
+<% end %>

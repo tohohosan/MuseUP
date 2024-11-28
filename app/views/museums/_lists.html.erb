@@ -1,0 +1,6 @@
+<div id="lists-container">
+    <%= render partial: "lists/list", collection: @lists, as: :list %>
+    <div id="lists-pagination" class="pagination">
+        <%= paginate @lists, param_name: :lists_page, remote: true %>
+    </div>
+</div>

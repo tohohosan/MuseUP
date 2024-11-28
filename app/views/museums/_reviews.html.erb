@@ -1,0 +1,6 @@
+<div id="reviews-container">
+    <%= render 'reviews/review' %>
+    <div id="reviews-pagination" class="pagination">
+        <%= paginate @reviews, param_name: :reviews_page, remote: true %>
+    </div>
+</div>

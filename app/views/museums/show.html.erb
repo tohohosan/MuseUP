@@ -60,13 +60,13 @@
                 <%= render 'museums/description' %>
             </div>
 
-            <div role="tabpanel" class="tab-content p-6" data-content="2">
-                <%= render 'reviews/review' %>
+            <div id="reviews-container" role="tabpanel" class="tab-content p-6" data-content="2">
+                <%= render partial: 'museums/reviews', locals: { reviews: @reviews } %>
             </div>
 
-            <div role="tabpanel" class="tab-content p-6" data-content="3">
+            <div id="lists-container" role="tabpanel" class="tab-content p-6" data-content="3">
                 <% if user_signed_in? %>
-                    <%= render partial: "lists/list", collection: @lists, as: :list %>
+                    <%= render partial: 'museums/lists', locals: { lists: @lists } %>
                 <% else %>
                     <p class="text-red-500 mt-4">リスト機能を使うにはログインが必要です。</p>
                 <% end %>
