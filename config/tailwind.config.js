@@ -12,12 +12,10 @@ module.exports = {
       maxWidth: {
         'xl': '550px',
       },
+      fontFamily: {
+      body: ['"メイリオ"', '"Meiryo"'],
+      }
     },
-    fontFamily: {
-      body: [
-        "メイリオ"
-      ]
-    }
   },
   plugins: [
     require('@tailwindcss/forms'),
@@ -28,5 +26,4 @@ module.exports = {
   daisyui: {
     themes: ["emerald"],
   },
-
 }

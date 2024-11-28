@@ -38,4 +38,8 @@
             <%= link_to 'リストの削除', list_path(@list), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
         </div>
     <% end %>
+
+    <div class="pagination">
+        <%= paginate @museums %>
+    </div>
 </div>

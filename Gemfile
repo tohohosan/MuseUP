@@ -35,6 +35,8 @@ gem "geocoder"
 
 gem "ransack"
 
+gem "kaminari"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
