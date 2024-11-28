@@ -1,0 +1,2 @@
+$(".grid").html("<%= j render partial: 'museum_list', locals: { museums: @museums } %>");
+$(".pagination").html("<%= j paginate @museums, remote: true %>");

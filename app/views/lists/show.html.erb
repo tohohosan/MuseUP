@@ -5,7 +5,7 @@
         <h3 class="text-xl font-semibold border-b mb-4">登録されているミュージアム一覧</h3>
         <% if @list.museums.any? %>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <% @list.museums.each do |museum| %>
+                <% @museums.each do |museum| %>
                     <div class="p-4 border rounded shadow flex items-center space-x-4">
                         <% if museum.images.attached? %>
                             <%= image_tag museum.images.first, class: "h-24 w-24 object-cover rounded" %>
