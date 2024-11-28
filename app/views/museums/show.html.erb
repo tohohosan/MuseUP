@@ -60,13 +60,23 @@
                 <%= render 'museums/description' %>
             </div>
 
-            <div id="reviews-container" role="tabpanel" class="tab-content p-6" data-content="2">
-                <%= render partial: 'museums/reviews', locals: { reviews: @reviews } %>
+            <div role="tabpanel" class="tab-content p-6" data-content="2">
+                <div id="reviews-container">
+                    <%= render 'reviews/review', reviews: @reviews %>
+                </div>
+                <div id="reviews-pagination" class="pagination">
+                    <%= paginate @reviews, param_name: :reviews_page, remote: true %>
+                </div>
             </div>
 
-            <div id="lists-container" role="tabpanel" class="tab-content p-6" data-content="3">
+            <div role="tabpanel" class="tab-content p-6" data-content="3">
                 <% if user_signed_in? %>
-                    <%= render partial: 'museums/lists', locals: { lists: @lists } %>
+                    <div id="lists-container">
+                        <%= render partial: "lists/list", collection: @lists, as: :list %>
+                    </div>
+                    <div id="lists-pagination" class="pagination">
+                        <%= paginate @lists, param_name: :lists_page, remote: true %>
+                    </div>
                 <% else %>
                     <p class="text-red-500 mt-4">リスト機能を使うにはログインが必要です。</p>
                 <% end %>
