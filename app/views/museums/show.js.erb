@@ -1,13 +1,9 @@
 <% if params[:reviews_page] %>
-    var reviewsContainer = document.getElementById("reviews-container");
-    if (reviewsContainer) {
-        reviewsContainer.innerHTML = "<%= j render partial: 'museums/reviews' %>";
-    }
+    document.querySelector('#reviews-container').innerHTML = "<%= j render partial: 'reviews/review', locals: { reviews: @reviews } %>";
+    document.querySelector('#reviews-pagination').innerHTML = "<%= j paginate @reviews, param_name: :reviews_page, remote: true %>";
 <% end %>
 
 <% if params[:lists_page] %>
-    var listsContainer = document.getElementById("lists-container");
-    if (listsContainer) {
-        listsContainer.innerHTML = "<%= j render partial: 'museums/lists' %>";
-    }
+    document.querySelector('#lists-container').innerHTML = "<%= j render partial: 'lists/list', collection: @lists, as: :list %>";
+    document.querySelector('#lists-pagination').innerHTML = "<%= j paginate @lists, param_name: :lists_page, remote: true %>";
 <% end %>

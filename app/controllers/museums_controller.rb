@@ -23,17 +23,14 @@ class MuseumsController < ApplicationController
 
     def show
         @museum = Museum.find(params[:id])
-
         @reviews = @museum.reviews.includes(:user).order(created_at: :desc).page(params[:reviews_page])
 
         if user_signed_in?
-
             @lists = current_user.lists.includes(:museums).order(created_at: :asc).page(params[:lists_page])
-
             @list_museums_counts = @lists.map { |list| [ list.id, list.museums.size ] }.to_h
             @note = @museum.notes.find_by(user: current_user)
         else
-            @lists = nil
+            @lists = Kaminari.paginate_array([]).page(1)
             @list_museums_counts = nil
             @note = nil
         end
