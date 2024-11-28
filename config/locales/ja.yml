@@ -9,3 +9,7 @@ ja:
         password: パスワード
         password_confirmation: パスワード確認
         remember_me: ログインを記憶する
+  views:
+    pagination:
+      previous: "前へ"
+      next: "次へ"

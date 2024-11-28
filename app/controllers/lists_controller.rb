@@ -3,14 +3,24 @@ class ListsController < ApplicationController
     before_action :set_list, only: [ :show, :edit, :update, :destroy, :add_museum, :remove_museum ]
 
     def index
-        @lists = current_user.lists.includes(:museums)
+        @lists = current_user.lists.includes(:museums).order(created_at: :asc).page(params[:page])
         @museum = Museum.find(params[:museum_id]) if params[:museum_id].present?
         @list_museums_counts = @lists.map { |list| [ list.id, list.museums.size ] }.to_h
+
+        respond_to do |format|
+            format.html
+            format.js
+        end
     end
 
     def show
         @list = List.find(params[:id])
-        @museums = @list.museums.includes(images_attachments: :blob)
+        @museums = @list.museums.includes(images_attachments: :blob).order(created_at: :asc).page(params[:page])
+
+        respond_to do |format|
+            format.html
+            format.js
+        end
     end
 
     def new
