@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   }
 
   root "staticpages#top"
+  get "contact", to: "staticpages#contact", as: "contact"
+  get "terms", to: "staticpages#terms", as: "terms"
+  get "privacy", to: "staticpages#privacy", as: "privacy"
+  get "notices", to: "staticpages#notices", as: "notices"
 
   devise_scope :user do
     get "users/:id", to: "users/registrations#show", as: :user
