@@ -13,7 +13,7 @@ module.exports = {
         'xl': '550px',
       },
       fontFamily: {
-      "BIZ UDPGothic", "sans-serif"
+        font: ["BIZ UDPGothic", "sans-serif"]
       }
     },
   },
