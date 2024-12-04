@@ -27,8 +27,15 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered w-full" %>
       </div>
 
+      <div class="flex items-center space-x-2">
+        <%= check_box_tag "agree_terms", "1", false, id: "agree_terms", class: "checkbox" %>
+        <p class="text-sm text-gray-700">
+          <%= link_to "利用規約", terms_path, class: "text-sm text-blue-500 hover:text-blue-700" %>と<%= link_to "プライバシーポリシー", privacy_path, class: "text-sm text-blue-500 hover:text-blue-700" %>に同意します。
+        </p>
+      </div>
+
       <div class="actions">
-        <%= f.submit "新規登録", class: "btn btn-primary w-full" %>
+        <%= f.submit "新規登録", class: "btn btn-primary w-full", id: "submit_button", disabled: true %>
       </div>
 
       <div class="text-center mt-4 text-sm text-gray-700 space-y-2">
@@ -36,4 +43,15 @@
       </div>
     <% end %>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const checkbox = document.getElementById("agree_terms");
+      const submitButton = document.getElementById("submit_button");
+
+      checkbox.addEventListener("change", function () {
+        submitButton.disabled = !checkbox.checked; // チェックが外れると無効化
+      });
+    });
+  </script>
 </body>
