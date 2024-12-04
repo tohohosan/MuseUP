@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "notices/index"
+  get "notices/show"
   devise_for :users, controllers: {
     registrations: "users/registrations"
   }
@@ -7,7 +9,9 @@ Rails.application.routes.draw do
   get "contact", to: "staticpages#contact", as: "contact"
   get "terms", to: "staticpages#terms", as: "terms"
   get "privacy", to: "staticpages#privacy", as: "privacy"
-  get "notices", to: "staticpages#notices", as: "notices"
+
+  resources :notices, only: [ :index, :show ]
+  get "/notices", to: "notices#index", as: "static_notices"
 
   devise_scope :user do
     get "users/:id", to: "users/registrations#show", as: :user

@@ -13,7 +13,7 @@ module.exports = {
         'xl': '550px',
       },
       fontFamily: {
-      body: ['"メイリオ"', '"Meiryo"'],
+      "BIZ UDPGothic", "sans-serif"
       }
     },
   },
