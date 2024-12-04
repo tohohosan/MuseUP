@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module MuseUp
   class Application < Rails::Application
+    config.hosts << "museup.jp"
     config.load_defaults 7.2
     config.i18n.default_locale = :ja
     config.time_zone = "Tokyo"
