@@ -8,3 +8,6 @@
 //= link controllers/application.js
 //= link controllers/hello_controller.js
 //= link controllers/index.js
+
+//= link tailwind.css
+//= link rails_admin.js

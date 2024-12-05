@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :notes, dependent: :destroy
   has_many :lists, dependent: :destroy
 
+  enum role: { general: 0, admin: 1 }
+
   private
 
   def create_default_lists
