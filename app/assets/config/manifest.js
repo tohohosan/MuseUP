@@ -1,7 +1,7 @@
 //= link_tree ../images
 //= link_directory ../stylesheets .css
 //= link_tree ../../../vendor/javascript .js
-//= link_tree ../builds
+//= link_tree ../builds .js
 
 //= link application.js
 //= link place_autocomplete.js
