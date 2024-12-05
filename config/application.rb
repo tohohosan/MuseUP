@@ -6,7 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module MuseUp
+module MuseUP
   class Application < Rails::Application
     config.hosts << "museup.jp"
     config.load_defaults 7.2
