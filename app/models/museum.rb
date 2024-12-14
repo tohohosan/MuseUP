@@ -4,6 +4,8 @@ class Museum < ApplicationRecord
   has_many :categories, through: :museum_categories
   has_many_attached :images
 
+  mount_uploader :image, ImageUploader
+
   has_many :reviews
   has_many :list_museums, dependent: :destroy
   has_many :lists, through: :list_museums
@@ -21,6 +23,16 @@ class Museum < ApplicationRecord
   validate :must_have_at_least_one_category
   validate :validate_image_count
   validate :validate_address
+
+  def process_and_attach_images(uploaded_images)
+    uploaded_images.each do |image|
+      uploader = ImageUploader.new
+      uploader.store!(image)
+
+      processed_image_path = uploader.file.path
+      images.attach(io: File.open(processed_image_path), filename: File.basename(processed_image_path), content_type: "image/webp")
+    end
+  end
 
   private
 

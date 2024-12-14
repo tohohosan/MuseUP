@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   get "notices/index"
   get "notices/show"
   devise_for :users, controllers: {
-    registrations: "users/registrations"
+    registrations: "users/registrations",
+    passwords: "users/passwords"
   }
 
   root "staticpages#top"
