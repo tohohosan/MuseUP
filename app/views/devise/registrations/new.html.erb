@@ -35,7 +35,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "新規登録", class: "btn btn-primary w-full", id: "submit_button", disabled: true %>
+        <%= f.submit "新規登録", class: "btn btn-primary w-full", id: "submit_button" %>
       </div>
 
       <div class="text-center mt-4 text-sm text-gray-700 space-y-2">
@@ -43,15 +43,3 @@
       </div>
     <% end %>
   </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const checkbox = document.getElementById("agree_terms");
-      const submitButton = document.getElementById("submit_button");
-
-      checkbox.addEventListener("change", function () {
-        submitButton.disabled = !checkbox.checked; // チェックが外れると無効化
-      });
-    });
-  </script>
-</body>

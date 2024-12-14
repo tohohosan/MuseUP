@@ -1,6 +1,7 @@
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
   <div class="w-full max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg">
-    <h2 class="text-2xl font-semibold text-center mb-4">パスワードをお忘れですか？</h2>
+    <h2 class="text-2xl font-semibold text-center mb-4 border-b-2">パスワードをお忘れですか？</h2>
+    <p class="mb-4">パスワードの再設定に関するご案内をお送りいたします。<br>以下入力欄にご案内を受け取るメールアドレスをご入力ください。</p>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "space-y-4" }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
