@@ -11,4 +11,3 @@
 
 //= link tailwind.css
 //= link rails_admin.js
-//= link rails_admin.scss
