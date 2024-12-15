@@ -494,7 +494,7 @@ DEPENDENCIES
   ransack
   rubocop-rails-omakase
   ruby-vips
-  sassc (~> 2.4)
+  sassc (~> 2.4.0)
   selenium-webdriver
   sprockets-rails
   stimulus-rails

@@ -88,4 +88,4 @@ group :test do
 end
 gem "cssbundling-rails"
 
-gem "sassc", "~> 2.4"
+gem "sassc", "~> 2.4.0"
