@@ -7,7 +7,7 @@
       <%= f.hidden_field :reset_password_token %>
 
       <div class="field">
-        <%= f.label :password, "新しいパスワード", class: "block text-sm font-medium text-gray-700" %><br />
+        <%= f.label :password, "新しいパスワード", class: "block text-sm font-medium text-gray-700" %>
         <% if @minimum_password_length %>
           <p class="text-xs text-gray-500">※ 最低 <%= @minimum_password_length %> 文字以上</p>
         <% end %>
