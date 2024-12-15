@@ -20,6 +20,19 @@
         </div>
       <% end %>
 
+      <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn flex items-center space-x-2 w-full" do %>
+        <!-- Google Logo -->
+        <img
+          src="https://www.svgrepo.com/show/475656/google-color.svg"
+          alt="Google Logo"
+          class="w-5 h-5"
+          loading="lazy"
+        />
+        <!-- Button Text -->
+        <span>Sign in with Google</span>
+      <% end %>
+
+
       <div class="actions">
         <%= f.submit "ログイン", class: "btn btn-primary w-full" %>
       </div>

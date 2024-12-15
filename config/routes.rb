@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   get "notices/index"
   get "notices/show"
+
   devise_for :users, controllers: {
     registrations: "users/registrations",
-    passwords: "users/passwords"
+    passwords: "users/passwords",
+    omniauth_callbacks: "users/omniauth_callbacks"
   }
 
   root "staticpages#top"
