@@ -275,6 +275,11 @@ Devise.setup do |config|
                 Rails.application.credentials.google[:client_secret],
                 { scope: "userinfo.email,userinfo.profile" }
 
+  config.omniauth :twitter2,
+                Rails.application.credentials.twitter[:client_id],
+                Rails.application.credentials.twitter[:client_secret],
+                { scope: "tweet.read users.read offline.access" }
+
   # ==> Hotwire/Turbo configuration
   # When using Devise with Hotwire/Turbo, the http status for error responses
   # and some redirects must match the following. The default in Devise for existing
