@@ -3,7 +3,7 @@ require "open-uri"
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable,
-        :omniauthable, omniauth_providers: %i[google_oauth2]
+        :omniauthable, omniauth_providers: %i[google_oauth2 twitter2]
   after_create :create_default_lists
 
   has_one_attached :image # プロフィール画像添付設定

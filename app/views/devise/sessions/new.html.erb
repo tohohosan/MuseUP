@@ -20,6 +20,10 @@
         </div>
       <% end %>
 
+      <div class="actions">
+        <%= f.submit "ログイン", class: "btn btn-primary w-full" %>
+      </div>
+
       <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn flex items-center space-x-2 w-full" do %>
         <!-- Google Logo -->
         <img
@@ -32,10 +36,18 @@
         <span>Sign in with Google</span>
       <% end %>
 
+      <%= link_to user_twitter2_omniauth_authorize_path, class: "btn btn-neutral flex items-center space-x-2 w-full" do %>
+        <!-- X Logo -->
+        <img
+          src="<%= asset_path('logo-white.png') %>"
+          alt="X Logo"
+          class="w-5 h-5"
+          loading="lazy"
+        />
+        <!-- Button Text -->
+        <span>Sign in with X</span>
+      <% end %>
 
-      <div class="actions">
-        <%= f.submit "ログイン", class: "btn btn-primary w-full" %>
-      </div>
       <div class="text-center mt-4 text-sm text-gray-700 space-y-6">
       <%= render "devise/shared/links" %>
       </div>
