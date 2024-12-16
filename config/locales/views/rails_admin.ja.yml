@@ -4,10 +4,14 @@ ja:
     # 全てのモデル記載
     models:
       user: ユーザー
-      post: 投稿
-      comment: コメント
-      like: いいね
-      contact: お問い合わせ
+      museum: ミュージアム
+      museum_category: ミュージアム＆カテゴリ
+      category: カテゴリ
+      review: レビュー
+      list: リスト
+      list_museum: リスト＆ミュージアム
+      note: メモ
+      notice: お知らせ
     attributes:
       # 各モデルのカラム名を記載
       user:
