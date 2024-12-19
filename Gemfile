@@ -57,6 +57,8 @@ gem "meta-tags"
 
 gem "carrierwave"
 
+gem "fog-aws"
+
 gem "omniauth"
 
 gem "omniauth-google-oauth2"

@@ -2,7 +2,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # 保存先のストレージ設定
-  storage :file
+  storage :fog
 
   # アップロードしたファイルの保存ディレクトリ
   def store_dir
@@ -13,7 +13,15 @@ class ImageUploader < CarrierWave::Uploader::Base
   process resize_to_fit: [ 800, 800 ]
 
   # WebP に変換
-  process convert: "webp"
+  process :convert_to_webp
+
+  def convert_to_webp
+    manipulate! do |img|
+      img.format("webp")
+      img = yield(img) if block_given?
+      img
+    end
+  end
 
   # 拡張子を変更
   def filename

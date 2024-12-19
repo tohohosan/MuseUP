@@ -2,9 +2,8 @@ class Museum < ApplicationRecord
   belongs_to :user
   has_many :museum_categories, dependent: :destroy
   has_many :categories, through: :museum_categories
-  has_many_attached :images
-
-  mount_uploader :image, ImageUploader
+  has_many :images, dependent: :destroy
+  accepts_nested_attributes_for :images, allow_destroy: true
 
   has_many :reviews
   has_many :list_museums, dependent: :destroy
@@ -24,16 +23,6 @@ class Museum < ApplicationRecord
   validate :validate_image_count
   validate :validate_address
 
-  def process_and_attach_images(uploaded_images)
-    uploaded_images.each do |image|
-      uploader = ImageUploader.new
-      uploader.store!(image)
-
-      processed_image_path = uploader.file.path
-      images.attach(io: File.open(processed_image_path), filename: File.basename(processed_image_path), content_type: "image/webp")
-    end
-  end
-
   private
 
   def must_have_at_least_one_category
@@ -42,7 +31,7 @@ class Museum < ApplicationRecord
 
   # 画像が4枚以内であることを確認するカスタムバリデーション
   def validate_image_count
-    if images.attached? && images.size > 4
+    if images.size > 4
       errors.add(:images, "画像は最大4枚までアップロードできます")
     end
   end

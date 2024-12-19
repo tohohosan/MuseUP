@@ -2,9 +2,9 @@
 <h2 class="text-2xl font-semibold text-center mb-4 border-b-2">マイページ</h2>
   <div class="text-center">
     <div class="avatar">
-      <% if current_user.image&.attached? %>
+      <% if current_user.image&.present? %>
         <div class="w-24 rounded-full">
-          <%= image_tag current_user.image, class: "rounded-full" %>
+          <%= image_tag current_user.image.url, class: "rounded-full" %>
         </div>
     <% else %>
       <div class="w-32 h-32 rounded-full bg-gray-300 flex items-center justify-center"></div>
