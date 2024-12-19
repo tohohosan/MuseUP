@@ -6,7 +6,7 @@ class User < ApplicationRecord
         :omniauthable, omniauth_providers: %i[google_oauth2 twitter2]
   after_create :create_default_lists
 
-  has_one_attached :image # プロフィール画像添付設定
+  mount_uploader :image, ImageUploader
 
   has_many :museums, dependent: :destroy
   has_many :reviews, dependent: :destroy

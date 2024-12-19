@@ -24,9 +24,7 @@ Rails.application.routes.draw do
   end
 
   resources :museums do
-    member do
-      delete :remove_image
-    end
+    resources :images, only: [ :destroy ]
 
     collection do
       get :nearest

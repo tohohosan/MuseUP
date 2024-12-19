@@ -2,10 +2,20 @@
     <div class="text-2xl font-semibold text-center border-b-2 mb-6"><%= @museum.name %></div>
 
     <div class="carousel w-full mb-4">
-        <% @museum.images.each_with_index do |image, index| %>
-            <div id="item<%= index + 1 %>" class="carousel-item w-full flex justify-center">
-                <%= image_tag image.url, class: 'max-w-full max-h-[30rem] object-contain mx-auto rounded shadow-lg' %>
-            </div>
+        <% if @museum.images.present? %>
+            <% @museum.images.each_with_index do |image, index| %>
+                <% if image.file.present? %>
+                    <div id="item<%= index + 1 %>" class="carousel-item w-full flex justify-center">
+                        <%= image_tag image.file.url, class: 'max-w-full max-h-[30rem] object-contain mx-auto rounded shadow-lg' %>
+                    </div>
+                <% else %>
+                    <div class="carousel-item w-full flex justify-center">
+                        <p class="text-center text-red-500">画像のURLが取得できません</p>
+                    </div>
+                <% end %>
+            <% end %>
+        <% else %>
+            <p class="text-center text-red-500">画像が登録されていません</p>
         <% end %>
     </div>
     <div class="flex w-full justify-center gap-2 py-2">

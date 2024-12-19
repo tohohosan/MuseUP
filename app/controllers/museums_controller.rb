@@ -44,36 +44,41 @@ class MuseumsController < ApplicationController
 
     def new
         @museum = current_user.museums.build
+        @museum.images.build while @museum.images.size < 4 # 最大4つまで初期化
         @categories = Category.all
     end
 
     def create
         @museum = current_user.museums.build(museum_params)
-        respond_to do |format|
-            if @museum.save
-                format.html { redirect_to new_museum_path, notice: "ミュージアムが投稿されました。" }
-            else
-                @categories = Category.all
-                flash.now[:alert] = "ミュージアムの投稿に失敗しました。"
-                format.html { render :new, status: :unprocessable_entity }
+
+        # 空の画像データを取り除く
+        if params[:museum][:images_attributes].present?
+            params[:museum][:images_attributes].each do |key, image|
+                if image[:file].is_a?(Array)
+                    image[:file] = image[:file].compact.reject(&:blank?)
+                end
             end
+        end
+
+        if @museum.save
+            redirect_to new_museum_path, notice: "ミュージアムが投稿されました。"
+        else
+            @categories = Category.all
+            flash.now[:alert] = "ミュージアムの投稿に失敗しました。"
+            render :new, status: :unprocessable_entity
         end
     end
 
     def edit
         @museum = Museum.find(params[:id])
+        @remaining_slots = 4 - @museum.images.size
         @categories = Category.all
     end
 
     def update
-        # 新しい画像がある場合は追加、既存の画像を保持
-        if params[:museum][:images]
-            params[:museum][:images].each do |new_image|
-                @museum.images.attach(new_image)
-            end
-        end
+        @museum = Museum.find(params[:id])
 
-        if @museum.update(museum_params.except(:images))
+        if @museum.update(museum_params)
             redirect_to @museum, notice: "ミュージアム情報が更新されました。"
         else
             @categories = Category.all
@@ -85,20 +90,6 @@ class MuseumsController < ApplicationController
     def destroy
         @museum.destroy
         redirect_to museums_path, notice: "ミュージアムが削除されました。"
-    end
-
-    def remove_image
-        @museum = Museum.find(params[:id])
-        image = @museum.images.find_by(id: params[:image_id])
-
-        if image.present?
-            image.purge
-            flash[:notice] = "画像が削除されました。"
-        else
-            flash[:alert] = "画像が見つかりませんでした。"
-        end
-
-        redirect_to edit_museum_path(@museum)
     end
 
     def nearest
@@ -122,7 +113,10 @@ class MuseumsController < ApplicationController
     end
 
     def museum_params
-        params.require(:museum).permit(:name, :address, :description, :url, images: [], category_ids: [])
+        params.require(:museum).permit(
+            :name, :address, :description, :url, category_ids: [],
+            images_attributes: [ :id, :file, :_destroy ]
+        )
     end
 
     def authorize_user!

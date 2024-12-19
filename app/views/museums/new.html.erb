@@ -47,11 +47,13 @@
         </div>
 
         <div class="mt-8">
-            <%= f.label :images, "画像アップロード" %>
-            <div class="mt-1">
-                <%= f.file_field :images, multiple: true, class: "file-input file-input-bordered w-full max-w-xs" %>
+            <%= f.label :images_attributes, "画像アップロード" %>
+            <div class="mt-1 gap-2">
+                <%= f.fields_for :images do |image_fields| %>
+                    <%= image_fields.file_field :file, class: "file-input file-input-bordered w-full" %>
+                <% end %>
             </div>
-                <small class="text-gray-500">最大 4 枚までアップロードできます</small>
+            <small class="text-gray-500">最大 4 枚までアップロードできます</small>
         </div>
 
         <div class="mt-8">
