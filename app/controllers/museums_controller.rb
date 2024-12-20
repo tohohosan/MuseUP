@@ -83,6 +83,7 @@ class MuseumsController < ApplicationController
         else
             @categories = Category.all
             flash.now[:alert] = @museum.errors.full_messages.to_sentence
+            logger.error @museum.errors.full_messages.join(", ")
             render :edit, status: :unprocessable_entity
         end
     end
