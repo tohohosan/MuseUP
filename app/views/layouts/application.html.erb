@@ -7,7 +7,6 @@
     <%= favicon_link_tag 'favicon.ico', type: 'image/x-icon' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
@@ -18,6 +17,21 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="MuseUP (みゅーじあっぷ)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://museup.jp" />
+    <meta property="og:image" content="MuseUP.png" />
+    <meta property="og:description" content="ミュージアムをもっと知る、もっと楽しむ。" />
+    <meta property="og:site_name" content="MuseUP" />
+
+    <!-- X（旧Twitter） Card tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@tohohoit" />
+    <meta name="twitter:title" content="MuseUP (みゅーじあっぷ)" />
+    <meta name="twitter:description" content="ミュージアムをもっと知る、もっと楽しむ。" />
+    <meta name="twitter:image" content="MuseUP.png" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HEV0D4QJK"></script>
