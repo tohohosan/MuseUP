@@ -8,12 +8,16 @@ class User < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :password, presence: true, length: { minimum: 6 }
+
   has_many :museums, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :lists, dependent: :destroy
 
-  enum role: { general: 0, admin: 1 }
+  enum :role, { general: 0, admin: 1 }
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
