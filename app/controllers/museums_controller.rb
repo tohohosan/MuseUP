@@ -63,6 +63,7 @@ class MuseumsController < ApplicationController
         if @museum.save
             redirect_to new_museum_path, notice: "ミュージアムが投稿されました。"
         else
+            Rails.logger.error @museum.errors.full_messages.join(", ")
             @categories = Category.all
             flash.now[:alert] = "ミュージアムの投稿に失敗しました。"
             render :new, status: :unprocessable_entity
