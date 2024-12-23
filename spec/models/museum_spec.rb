@@ -5,6 +5,10 @@ RSpec.describe Museum, type: :model do
   let(:museum) { FactoryBot.build(:museum) }
   let(:category) { FactoryBot.build(:category) }
 
+  let(:uploaded_file) do
+    Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/test_image.jpg'), 'image/jpeg')
+  end
+
   describe 'バリデーション' do
     context '有効なミュージアム' do
       it '条件が正しい場合、有効であること' do
@@ -54,14 +58,14 @@ RSpec.describe Museum, type: :model do
       end
 
       it '画像が5枚以上の場合、無効であること' do
-        uploaded_file = Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/test_image.jpg'), 'image/jpeg')
+        museum.save!
 
         5.times do
-          museum.images.build(file: uploaded_file)
+          museum.images.create!(file: uploaded_file)
         end
 
         expect(museum).not_to be_valid
-        expect(museum.errors[:images]).to include('は4枚以内でアップロードしてください')
+        expect(museum.errors[:images]).to include('画像は最大4枚までアップロードできます')
       end
     end
   end
