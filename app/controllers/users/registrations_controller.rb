@@ -5,6 +5,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = current_user
   end
 
+  def create
+    build_resource(sign_up_params)
+
+    if resource.save
+      flash[:notice] = "ユーザー登録に成功しました。" # 成功メッセージ
+      sign_up(resource_name, resource)
+      respond_with resource, location: after_sign_up_path_for(resource)
+    else
+      flash[:alert] = resource.errors.full_messages.join(", ") # エラーメッセージをフラッシュに格納
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_with resource
+    end
+  end
+
   def edit
   end
 

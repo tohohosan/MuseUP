@@ -8,8 +8,8 @@ class Image < ApplicationRecord
   private
 
   def validate_image_size
-    if file.present? && file.size > 3.megabytes
-      errors.add(:file, "ファイルサイズは3MB以内にしてください")
+    if file.present? && file.size > 5.megabytes
+      errors.add(:file, "ファイルサイズは5MB以内にしてください")
     end
   end
 end
