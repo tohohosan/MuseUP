@@ -14,7 +14,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   # アップロード時にサイズを変更
-  process resize_to_fit: [ 800, 800 ], unless: -> { Rails.env.test? }
+  process :resize_to_fit => [ 800, 800 ], unless: -> { Rails.env.test? }
 
   # WebP に変換
   process :convert_to_webp, unless: -> { Rails.env.test? }
