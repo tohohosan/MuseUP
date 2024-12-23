@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Museum, type: :model do
   let(:user) { FactoryBot.create(:user) }
-  let(:museum) { FactoryBot.build(:museum) }
+  let(:museum) { FactoryBot.build(:museum, latitude: 35.6895, longitude: 139.6917) }
   let(:category) { FactoryBot.build(:category) }
 
   let(:uploaded_file) do

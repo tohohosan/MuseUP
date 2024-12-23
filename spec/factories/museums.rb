@@ -4,6 +4,8 @@ FactoryBot.define do
     address { "東京都新宿区1-1-1" }
     description { "テスト説明" }
     url { "http://example.com" }
+    latitude { 35.6895 }
+    longitude { 139.6917 }
 
     association :user
 
