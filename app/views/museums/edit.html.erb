@@ -57,13 +57,14 @@
                     </div>
                 <% end %>
 
-                <% @remaining_slots.times do %>
+                <% @museum.images.select { |image| !image.persisted? }.each do |new_image| %>
                     <%= f.fields_for :images, @museum.images.build do |new_image_fields| %>
                         <%= new_image_fields.file_field :file, class: "file-input file-input-bordered w-full max-w-xs mt-4" %>
                     <% end %>
                 <% end %>
             </div>
             <small class="text-gray-500">最大 4 枚までアップロードできます</small>
+            <small class="text-gray-500">ファイルサイズは 1 枚につき 3 MB 以内にしてください</small>
         </div>
 
         <div class="mt-12">
