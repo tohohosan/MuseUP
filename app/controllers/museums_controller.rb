@@ -72,7 +72,10 @@ class MuseumsController < ApplicationController
 
     def edit
         @museum = Museum.find(params[:id])
-        @remaining_slots = 4 - @museum.images.size
+        # 登録済み画像の数を取得
+        existing_images_count = @museum.images.select { |image| image.persisted? }.size
+        # 空のスロット数を計算してビルド
+        (4 - existing_images_count).times { @museum.images.build }
         @categories = Category.all
     end
 
