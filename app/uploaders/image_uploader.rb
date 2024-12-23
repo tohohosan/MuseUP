@@ -21,8 +21,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def convert_to_webp
     manipulate! do |img|
-      img.format("webp")
-      img = yield(img) if block_given?
+      img.format("webp") { |b| b }
       img
     end
   end
