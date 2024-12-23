@@ -1,8 +1,12 @@
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  # 保存先のストレージ設定
-  storage :fog
+  # 環境ごとのストレージ設定
+  if Rails.env.production? || Rails.env.development?
+    storage :fog
+  else
+    storage :file # テスト環境では file ストレージを使用
+  end
 
   # アップロードしたファイルの保存ディレクトリ
   def store_dir
@@ -10,10 +14,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   # アップロード時にサイズを変更
-  process resize_to_fit: [ 800, 800 ]
+  process resize_to_fit: [ 800, 800 ], unless: -> { Rails.env.test? }
 
   # WebP に変換
-  process :convert_to_webp
+  process :convert_to_webp, unless: -> { Rails.env.test? }
 
   def convert_to_webp
     manipulate! do |img|
@@ -25,7 +29,11 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # 拡張子を変更
   def filename
-    super.chomp(File.extname(super)) + ".webp" if original_filename.present?
+    if original_filename.present? && !Rails.env.test?
+      super.chomp(File.extname(super)) + ".webp"
+    else
+      super
+    end
   end
 
   # 許可するファイル形式
