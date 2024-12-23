@@ -11,7 +11,11 @@ class Museum < ApplicationRecord
   has_many :notes, dependent: :destroy
 
   geocoded_by :address
-  after_validation :geocode, if: :will_save_change_to_address?
+  if Rails.env.test?
+    after_validation :mock_geocode, if: ->(obj) { obj.address.present? && obj.latitude.blank? }
+  else
+    after_validation :geocode, if: ->(obj) { obj.address.present? && obj.latitude.blank? }
+  end
 
   validates :name, :address, :description, presence: true
   validates :categories, presence: { message: "を少なくとも1つ選択してください" }
@@ -45,6 +49,11 @@ class Museum < ApplicationRecord
     else
     errors.add(:address, "を入力してください")
     end
+  end
+
+  def mock_geocode
+    self.latitude = 35.6895 # 仮の緯度
+    self.longitude = 139.6917 # 仮の経度
   end
 
   def self.ransackable_attributes(auth_object = nil)

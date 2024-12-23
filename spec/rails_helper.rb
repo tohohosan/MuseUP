@@ -9,6 +9,10 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 # return unless Rails.env.test?
 require 'rspec/rails'
 
+require 'webmock/rspec'
+# 外部リクエストを禁止
+WebMock.disable_net_connect!(allow_localhost: true)
+
 # spec/support 配下のファイルを読み込み
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
@@ -41,6 +45,11 @@ RSpec.configure do |config|
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
   ]
+
+  config.before(:each) do
+    stub_request(:get, /maps.googleapis.com/).
+      to_return(status: 200, body: '{}', headers: {})
+  end
 
   config.include FactoryBot::Syntax::Methods
 
