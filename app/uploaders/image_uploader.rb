@@ -38,6 +38,6 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # 許可するファイル形式
   def extension_allowlist
-    %w[jpg jpeg gif png]
+    %w[jpg jpeg gif png webp]
   end
 end
