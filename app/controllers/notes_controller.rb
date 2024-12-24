@@ -4,6 +4,8 @@ class NotesController < ApplicationController
     before_action :set_note, only: [ :show, :edit, :update, :destroy ]
 
     def show
+        @museum = Museum.find(params[:museum_id])
+        @note = @museum.notes.find(params[:id])
         redirect_to @museum, alert: "メモが見つかりません。" unless @note
     end
 
