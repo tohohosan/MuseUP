@@ -2,10 +2,11 @@
     <h3 class="text-xl font-semibold border-b mb-4">登録されているミュージアム一覧</h3>
     <% if @list.museums.any? %>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <% @museums.each do |museum| %>
+            <% @list.museums.each do |museum| %>
                 <div class="p-4 border rounded shadow flex items-center space-x-4">
-                    <% if museum.images.attached? %>
-                        <%= image_tag museum.images.first, class: "h-24 w-24 object-cover rounded" %>
+                    <% if museum.images.any? %>
+                        <% first_image = museum.image.first %>
+                        <%= image_tag first_image.file.url, class: "h-24 w-24 object-cover rounded" %>
                     <% else %>
                         <div class="h-24 w-24 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
                             画像なし
