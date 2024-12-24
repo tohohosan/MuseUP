@@ -12,6 +12,7 @@ module MuseUP
     config.load_defaults 7.2
     config.i18n.default_locale = :ja
     config.time_zone = "Tokyo"
+    config.exceptions_app = self.routes
 
     config.autoload_lib(ignore: %w[assets tasks])
     config.active_record.default_timezone = :local

@@ -5,7 +5,7 @@
             <% @list.museums.each do |museum| %>
                 <div class="p-4 border rounded shadow flex items-center space-x-4">
                     <% if museum.images.any? %>
-                        <% first_image = museum.image.first %>
+                        <% first_image = museum.images.first %>
                         <%= image_tag first_image.file.url, class: "h-24 w-24 object-cover rounded" %>
                     <% else %>
                         <div class="h-24 w-24 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
