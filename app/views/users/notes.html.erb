@@ -22,5 +22,8 @@
     <% else %>
         <p class="text-gray-500">まだメモがありません。</p>
     <% end %>
-    <%= paginate @notes %>
+
+    <div class="pagination">
+        <%= paginate @notes, params: { user_id: @user.id }, link_options: { remote: false } %>
+    </div>
 </div>
