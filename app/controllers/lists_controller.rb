@@ -15,7 +15,7 @@ class ListsController < ApplicationController
 
     def show
         @list = List.find(params[:id])
-        @museums = @list.museums.includes(images_attachments: :blob).order(created_at: :asc).page(params[:page])
+        @museums = @list.museums.includes(:images).order(created_at: :asc).page(params[:page])
 
         respond_to do |format|
             format.html
