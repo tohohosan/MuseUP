@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_up(resource_name, resource)
       respond_with resource, location: after_sign_up_path_for(resource)
     else
-      flash[:alert] = resource.errors.full_messages.join(", ") # エラーメッセージをフラッシュに格納
+      flash[:alert] = resource.errors.full_messages.join("。")
       clean_up_passwords resource
       set_minimum_password_length
       respond_with resource

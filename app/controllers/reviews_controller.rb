@@ -19,7 +19,7 @@ class ReviewsController < ApplicationController
         if @review.save
             redirect_to @museum, notice: "レビューが投稿されました。"
         else
-            flash.now[:alert] = @review.errors.full_messages.to_sentence
+            flash[:alert] = @review.errors.full_messages.join("。")
             render :new, status: :unprocessable_entity
         end
     end
@@ -31,7 +31,7 @@ class ReviewsController < ApplicationController
         if @review.update(review_params)
             redirect_to @museum, notice: "レビューが更新されました。"
         else
-            flash.now[:alert] = @review.errors.full_messages.to_sentence
+            flash[:alert] = @review.errors.full_messages.join("。")
             render :edit, status: :unprocessable_entity
         end
     end

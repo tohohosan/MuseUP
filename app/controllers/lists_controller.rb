@@ -15,7 +15,7 @@ class ListsController < ApplicationController
 
     def show
         @list = List.find(params[:id])
-        @museums = @list.museums.includes(:images).order(created_at: :asc).page(params[:page])
+        @museums = @list.museums.includes(:images).order(created_at: :asc).page(params[:page]).per(6)
 
         respond_to do |format|
             format.html
@@ -32,7 +32,7 @@ class ListsController < ApplicationController
         if @list.save
             redirect_to lists_path, notice: "リストを作成しました。"
         else
-            flash.now[:alert] = "リストの作成に失敗しました。"
+            flash[:alert] = @list.errors.full_messages.join("。")
             render :new
         end
     end
@@ -47,7 +47,7 @@ class ListsController < ApplicationController
             if @list.update(list_params)
                 redirect_to lists_path, notice: "リストを更新しました。"
             else
-                flash.now[:alert] = "リストの更新に失敗しました。"
+                flash[:alert] = @list.errors.full_messages.join("。")
                 render :edit
             end
         end

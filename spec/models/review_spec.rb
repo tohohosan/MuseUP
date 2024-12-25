@@ -18,7 +18,7 @@ RSpec.describe Review, type: :model do
         expect(review).not_to be_valid
       end
 
-      it '内容が500文字以上の場合、無効であること' do
+      it '内容が500文字より長い場合、無効であること' do
         review.content = 'あ' * 501
         expect(review).not_to be_valid
       end
