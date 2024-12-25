@@ -1,29 +1,11 @@
 <div class="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-md space-y-4">
     <h1 class="text-2xl font-semibold text-center mb-4 border-b-2"><%= current_user.name %>のメモ一覧</h1>
 
-    <% if @notes.present? %>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            <% @notes.each do |note| %>
-                <div class="p-4 border rounded shadow">
-                    <div class="font-bold mb-2">
-                        <%= link_to note.museum.name, museum_path(note.museum), class: "text-blue-500 hover:text-blue-700" %>のメモ:
-                    </div>
-
-                    <p class="text-gray-700 truncate"><%= note.content %></p>
-                    <%= link_to "詳細を見る", museum_note_path(note.museum, note), class: "text-blue-500 hover:text-blue-700 mt-4 block" %>
-
-                    <div class="mt-4 flex space-x-2">
-                        <%= link_to "編集", edit_museum_note_path(note.museum, note), class: "btn btn-sm btn-secondary" %>
-                        <%= button_to "削除", museum_note_path(note.museum, note), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
-                    </div>
-                </div>
-            <% end %>
-        </div>
-    <% else %>
-        <p class="text-gray-500">まだメモがありません。</p>
-    <% end %>
+    <div id="note_list">
+        <%= render partial: 'note_list' %>
+    </div>
 
     <div class="pagination">
-        <%= paginate @notes, params: { user_id: @user.id }, link_options: { remote: false } %>
+        <%= paginate @notes, params: { user_id: @user.id }, remote: true, data: { turbolinks: false } %>
     </div>
 </div>

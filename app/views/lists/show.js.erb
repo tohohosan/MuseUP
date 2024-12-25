@@ -1,2 +1,2 @@
-document.querySelector('.lists-container').innerHTML = "<%= j(render @lists) %>";
-document.querySelector('.pagination').innerHTML = "<%= j(paginate @lists) %>";
+$("#museums-list").html("<%= j render partial: 'museum_list', locals: { museums: @museums } %>");
+$(".pagination").html("<%= j paginate @museums, params: { list_id: @list.id }, remote: true %>");

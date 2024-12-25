@@ -1,0 +1,2 @@
+$("#note_list").html("<%= j render partial: 'note_list' %>");
+$(".pagination").html("<%= j paginate @notes, remote: true %>");

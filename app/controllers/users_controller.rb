@@ -3,10 +3,11 @@ class UsersController < ApplicationController
     before_action :set_user, only: [ :notes ]
 
     def notes
-        # 指定されたユーザーの全メモを取得
-        @notes = @user.notes.includes(:museum).order(created_at: :desc).page(params[:page]).per(6)
+        @notes = @user.notes.includes(:museum).order(created_at: :desc).page(params[:page])
+
         respond_to do |format|
-            format.html # HTML のみ対応
+            format.html
+            format.js
         end
     end
 
