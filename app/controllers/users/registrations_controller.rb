@@ -29,7 +29,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash[:notice] = "プロフィールを更新しました。"
       redirect_to user_path(current_user.id)
     else
-      flash.now[:alert] = "プロフィールの更新に失敗しました。"
+      flash[:alert] = resource.errors.full_messages.join("。")
       render :edit
     end
   end
