@@ -1,0 +1,19 @@
+<% if @notes.present? %>
+    <% @notes.each do |note| %>
+        <div class="p-4 border rounded shadow">
+            <div class="font-bold mb-2">
+                <%= link_to note.museum.name, museum_path(note.museum), class: "text-blue-500 hover:text-blue-700" %>のメモ:
+            </div>
+
+            <p class="text-gray-700 truncate"><%= note.content %></p>
+            <%= link_to "詳細を見る", museum_note_path(note.museum, note), class: "text-blue-500 hover:text-blue-700 mt-4 block" %>
+
+            <div class="mt-4 flex space-x-2">
+                <%= link_to "編集", edit_museum_note_path(note.museum, note), class: "btn btn-sm btn-secondary" %>
+                <%= button_to "削除", museum_note_path(note.museum, note), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
+            </div>
+        </div>
+    <% end %>
+<% else %>
+    <p class="text-gray-500">まだメモがありません。</p>
+<% end %>

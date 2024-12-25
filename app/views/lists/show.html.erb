@@ -1,7 +1,7 @@
 <div class="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-md space-y-4">
     <h2 class="text-2xl font-semibold text-center mb-4 border-b-2"><%= @list.name %>リスト</h2>
 
-    <div class="lists-container">
+    <div id="museums-list">
         <%= render partial: 'museum_list', locals: { museums: @museums } %>
     </div>
 
@@ -13,6 +13,6 @@
     <% end %>
 
     <div class="pagination">
-        <%= paginate @museums %>
+        <%= paginate @museums, params: { list_id: @list.id }, remote: true %>
     </div>
 </div>

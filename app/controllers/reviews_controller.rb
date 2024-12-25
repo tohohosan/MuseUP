@@ -6,6 +6,11 @@ class ReviewsController < ApplicationController
 
     def index
         @reviews = @museum.reviews.includes(:user).order(created_at: :desc).page(params[:page])
+
+        respond_to do |format|
+            format.html
+            format.js
+        end
     end
 
     def new
