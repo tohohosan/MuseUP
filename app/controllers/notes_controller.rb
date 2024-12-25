@@ -18,6 +18,7 @@ class NotesController < ApplicationController
         if @note.update(note_params)
             redirect_to determine_redirect_path, notice: "メモを保存しました。"
         else
+            flash[:alert] = @note.errors.full_messages.join("。")
             render :new, status: :unprocessable_entity
         end
     end
@@ -29,6 +30,7 @@ class NotesController < ApplicationController
         if @note.update(note_params)
             redirect_to determine_redirect_path, notice: "メモを更新しました。"
         else
+            flash[:alert] = @note.errors.full_messages.join("。")
             render :edit, status: :unprocessable_entity
         end
     end

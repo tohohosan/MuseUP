@@ -63,9 +63,8 @@ class MuseumsController < ApplicationController
         if @museum.save
             redirect_to new_museum_path, notice: "ミュージアムが投稿されました。"
         else
-            Rails.logger.error @museum.errors.full_messages.join(", ")
             @categories = Category.all
-            flash.now[:alert] = "ミュージアムの投稿に失敗しました。"
+            flash[:alert] = @museum.errors.full_messages.join("。")
             render :new, status: :unprocessable_entity
         end
     end
@@ -84,7 +83,7 @@ class MuseumsController < ApplicationController
             redirect_to @museum, notice: "ミュージアム情報が更新されました。"
         else
             @categories = Category.all
-            flash.now[:alert] = @museum.errors.full_messages.to_sentence
+            flash[:alert] = @museum.errors.full_messages.join("。")
             render :edit, status: :unprocessable_entity
         end
     end

@@ -18,6 +18,11 @@ RSpec.describe List, type: :model do
         expect(list.errors[:name]).to include("を入力してください")
       end
 
+      it 'リスト名が50文字より長い場合、無効であること' do
+        list.name = 'あ' * 51
+        expect(list).not_to be_valid
+      end
+
       it '同じユーザー内でリスト名が重複する場合、無効であること' do
         FactoryBot.create(:list, user: user, name: '重複リスト')
         duplicate_list = FactoryBot.build(:list, user: user, name: '重複リスト')

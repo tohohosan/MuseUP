@@ -16,6 +16,11 @@ RSpec.describe User, type: :model do
         expect(user).not_to be_valid
       end
 
+      it '名前が50文字より長い場合、無効であること' do
+        user.name = 'あ' * 51
+        expect(user).not_to be_valid
+      end
+
       it 'メールアドレスが空の場合、無効であること' do
         user = FactoryBot.build(:user, email: '')
         expect(user).not_to be_valid

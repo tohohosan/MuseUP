@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
     def notes
         # 指定されたユーザーの全メモを取得
-        @notes = @user.notes.includes(:museum).order(created_at: :desc).page(params[:page])
+        @notes = @user.notes.includes(:museum).order(created_at: :desc).page(params[:page]).per(6)
         respond_to do |format|
             format.html # HTML のみ対応
         end

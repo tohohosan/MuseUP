@@ -9,6 +9,20 @@ ja:
         password: パスワード
         password_confirmation: パスワード確認
         remember_me: ログインを記憶する
+      museum:
+        name: 名前
+        address: 住所
+        description: 説明
+        categories: カテゴリ
+        url: URL
+        images: 画像
+      review:
+        content: 内容
+        rating: おすすめ度
+      list:
+        name: リスト名
+      note:
+        content: 内容
   views:
     pagination:
       previous: "前へ"
