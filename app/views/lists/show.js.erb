@@ -1,15 +1,2 @@
-$("#museums-list").html("<%= j render partial: 'museum_list', locals: { museums: @museums } %>");
-$(".pagination").html("<%= j paginate @museums, remote: true %>");
-
-console.log('ページネーションのリクエストが成功しました');
-
-// サーバーから取得した新しいリストHTMLを表示
-console.log('新しいHTMLの挿入:', '<%= j render partial: "lists/museum_list", locals: { museums: @museums } %>');
-
-// HTMLの置き換え処理
-$("#museum-list").html("<%= j render partial: 'lists/museum_list', locals: { museums: @museums } %>");
-
-// ページネーションリンクの更新確認
-console.log('ページネーションリンク:', '<%= j paginate @museums %>');
-$("#pagination").html("<%= j paginate @museums %>");
-
+document.querySelector('#museums-list').innerHTML = "<%= j render partial: 'museum_list', locals: { museums: @museums } %>";
+document.querySelector('.pagination').innerHTML = "<%= j paginate @museums, remote: true, data: { turbolinks: false }  %>";
