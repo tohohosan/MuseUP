@@ -2,7 +2,7 @@
     <h2 class="text-2xl font-semibold text-center mb-4 border-b-2"><%= @list.name %>リスト</h2>
 
     <div id="museums-list">
-        <%= render partial: 'museum_list', locals: { museums: @museums } %>
+        <%= render partial: "museum_list", locals: { museums: @museums } %>
     </div>
 
     <% unless @list.default? %>
@@ -13,6 +13,6 @@
     <% end %>
 
     <div class="pagination">
-        <%= paginate @museums, params: { list_id: @list.id }, remote: true %>
+        <%= paginate @museums, remote: true, data: { turbolinks: false } %>
     </div>
 </div>

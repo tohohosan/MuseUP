@@ -7,3 +7,10 @@ import "place_autocomplete";
 // Rails UJS の読み込み
 import Rails from "@rails/ujs";
 Rails.start();
+
+$(document).on('turbolinks:load', function () {
+    $(document).on('click', '.pagination a', function () {
+        $.getScript(this.href);
+        return false;
+    });
+});
