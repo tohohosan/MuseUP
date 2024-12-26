@@ -1,2 +1,2 @@
-$("#note_list").html("<%= j render partial: 'note_list' %>");
-$(".pagination").html("<%= j paginate @notes, remote: true %>");
+document.querySelector('#note_list').innerHTML = "<%= j render partial: 'note_list' %>";
+document.querySelector('.pagination').innerHTML = "<%= j paginate @notes, remote: true, data: { turbolinks: false }  %>";
