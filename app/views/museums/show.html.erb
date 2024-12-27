@@ -46,7 +46,7 @@
     <div class="tabs-container">
         <div role="tablist" class="tabs tabs-bordered w-full">
             <!-- 詳細情報タブ -->
-            <input type="radio" name="my_tabs_2" id="tab1" class="hidden">
+            <input type="radio" name="my_tabs_2" id="tab1" class="hidden" <%= 'checked' if @active_tab == 1 %>>
             <label for="tab1" class="tab flex-1 items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
@@ -93,7 +93,7 @@
                     <%= render 'reviews/review', reviews: @reviews %>
                 </div>
                 <div id="reviews-pagination" class="pagination">
-                    <%= paginate @reviews, param_name: :reviews_page, remote: true %>
+                    <%= paginate @reviews, param_name: :reviews_page, remote: true, params: { tab: 2 }.compact, only_path: true %>
                 </div>
             </div>
 
@@ -103,7 +103,7 @@
                         <%= render partial: "lists/list", collection: @lists, as: :list %>
                     </div>
                     <div id="lists-pagination" class="pagination">
-                        <%= paginate @lists, param_name: :lists_page, remote: true %>
+                        <%= paginate @lists, param_name: :lists_page, remote: true, params: { tab: 3 }.compact, only_path: true %>
                     </div>
                 <% else %>
                     <p class="text-red-500 mt-4">リスト機能を使うにはログインが必要です。</p>
@@ -151,18 +151,88 @@
         const tabs = document.querySelectorAll('.tabs input[type="radio"]');
         const contents = document.querySelectorAll('.tab-content');
 
-        tabs.forEach((tab, index) => {
-            tab.addEventListener('change', () => {
-                contents.forEach(content => content.style.display = 'none');
-                contents[index].style.display = 'block';
-            });
-        });
+        // URLからクエリパラメータを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab') || '1'; // デフォルトで1を選択
 
-        // 初期表示の設定
-        if (tabs[0]) {
-            tabs[0].checked = true;
-            contents[0].style.display = 'block';
+        // 初期タブ状態の設定
+        function activateTab(tabIndex) {
+            tabs.forEach((tab, index) => {
+            const content = contents[index];
+            if (index + 1 == tabIndex) {
+                tab.checked = true;
+                content.style.display = 'block';
+            } else {
+                tab.checked = false;
+                content.style.display = 'none';
+            }
+        });
+    }
+
+    // 初期表示
+    activateTab(tabParam);
+
+    // タブクリック時の処理
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('change', () => {
+            const tabIndex = index + 1;
+
+            // タブの表示切り替え
+            activateTab(tabIndex);
+
+            // URL の更新
+            const url = new URL(window.location.href);
+            url.searchParams.set('tab', tabIndex);
+            window.history.replaceState(null, '', url.toString());
+        });
+    });
+
+    // ページネーションリンクのクリック処理
+    function updatePageLinks(container, paramName) {
+        if (!container) return;
+
+        container.addEventListener('click', (event) => {
+            const link = event.target.closest('a');
+                if (link) {
+                    event.preventDefault();
+                    const url = new URL(link.href);
+
+                    // ページ番号の更新
+                    const page = url.searchParams.get(paramName);
+                    const currentUrl = new URL(window.location.href);
+                    currentUrl.searchParams.set(paramName, page);
+
+                    // ページ番号を URL に反映
+                    window.history.pushState(null, '', currentUrl.toString());
+
+                    // ページネーションの内容を非同期で更新
+                    fetch(link.href, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                        .then(response => response.text())
+                        .then(html => {
+                            const newContent = new DOMParser().parseFromString(html, 'text/html');
+                            const updatedContainer = newContent.querySelector(`#${container.id}`);
+                            container.innerHTML = updatedContainer.innerHTML;
+
+                            // イベントリスナーを再登録
+                            updatePageLinks(container, paramName);
+                        })
+                        .catch(error => console.error('エラー:', error));
+                }
+            });
         }
+
+        // 各ページネーションに処理を適用
+        const reviewsPagination = document.querySelector('#reviews-pagination');
+        const listsPagination = document.querySelector('#lists-pagination');
+        updatePageLinks(reviewsPagination, 'reviews_page');
+        updatePageLinks(listsPagination, 'lists_page');
+
+        // 履歴変更時のタブとページ更新対応
+        window.addEventListener('popstate', () => {
+            const newUrlParams = new URLSearchParams(window.location.search);
+            const newTabParam = newUrlParams.get('tab') || '1';
+            activateTab(newTabParam);
+        });
     });
 </script>
 

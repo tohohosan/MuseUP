@@ -1,9 +1,11 @@
-<% if params[:reviews_page] %>
-    document.querySelector('#reviews-container').innerHTML = "<%= j render partial: 'reviews/review', locals: { reviews: @reviews } %>";
-    document.querySelector('#reviews-pagination').innerHTML = "<%= j paginate @reviews, param_name: :reviews_page, remote: true %>";
-<% end %>
+<% if params[:reviews_page] || params[:lists_page] %>
+    <% if params[:reviews_page] %>
+        document.querySelector('#reviews-container').innerHTML = "<%= j render partial: 'reviews/review', locals: { reviews: @reviews } %>";
+        document.querySelector('#reviews-pagination').innerHTML = "<%= j paginate @reviews, param_name: :reviews_page, params: { tab: 2 }, remote: true %>";
+    <% end %>
 
-<% if params[:lists_page] %>
-    document.querySelector('#lists-container').innerHTML = "<%= j render partial: 'lists/list', collection: @lists, as: :list %>";
-    document.querySelector('#lists-pagination').innerHTML = "<%= j paginate @lists, param_name: :lists_page, remote: true %>";
+    <% if params[:lists_page] %>
+        document.querySelector('#lists-container').innerHTML = "<%= j render partial: 'lists/list', collection: @lists, as: :list %>";
+        document.querySelector('#lists-pagination').innerHTML = "<%= j paginate @lists, param_name: :lists_page, params: { tab: 3 }, remote: true %>";
+    <% end %>
 <% end %>
