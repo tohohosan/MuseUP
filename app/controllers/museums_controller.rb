@@ -22,6 +22,8 @@ class MuseumsController < ApplicationController
     end
 
     def show
+        @tab = params[:tab].presence || "1"
+
         @museum = Museum.find(params[:id])
         @reviews = @museum.reviews.includes(:user).order(created_at: :desc).page(params[:reviews_page])
 
