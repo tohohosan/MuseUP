@@ -1,3 +1,19 @@
 <span class="prev">
-    <%= link_to_unless current_page.first?, t('views.pagination.previous').html_safe, url, class: "join-item btn", rel: 'prev', remote: true %>
+    <% if controller_name == 'museums' && action_name == 'show' %>
+        <% if params[:reviews_page].present? %>
+            <%= link_to_unless current_page.first?, t('views.pagination.previous').html_safe,
+                url_for(request.query_parameters.merge(reviews_page: 1)),
+                class: "join-item btn", rel: 'prev', remote: true %>
+        <% elsif params[:lists_page].present? || params[:tab] == '3' %>
+            <%= link_to_unless current_page.first?, t('views.pagination.previous').html_safe,
+                url_for(request.query_parameters.merge(lists_page: 1, reviews_page: nil)),
+                class: "join-item btn", rel: 'prev', remote: true %>
+        <% else %>
+            <%= link_to_unless current_page.first?, t('views.pagination.previous').html_safe, url,
+                class: "join-item btn", rel: 'prev', remote: true %>
+        <% end %>
+    <% else %>
+        <%= link_to_unless current_page.first?, t('views.pagination.previous').html_safe, url,
+            class: "join-item btn", rel: 'prev', remote: true %>
+    <% end %>
 </span>
