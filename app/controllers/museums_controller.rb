@@ -25,10 +25,10 @@ class MuseumsController < ApplicationController
         @tab = params[:tab].presence || "1"
 
         @museum = Museum.find(params[:id])
-        @reviews = @museum.reviews.includes(:user).order(created_at: :desc).page(params[:reviews_page])
+        @reviews = @museum.reviews.includes(:user).order(created_at: :desc).page(params[:reviews_page] || 1)
 
         if user_signed_in?
-            @lists = current_user.lists.includes(:museums).order(created_at: :asc).page(params[:lists_page])
+            @lists = current_user.lists.includes(:museums).order(created_at: :asc).page(params[:lists_page] || 1)
             @list_museums_counts = @lists.map { |list| [ list.id, list.museums.size ] }.to_h
             @note = @museum.notes.find_by(user: current_user)
         else

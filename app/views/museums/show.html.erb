@@ -93,7 +93,11 @@
                     <%= render 'reviews/review', reviews: @reviews %>
                 </div>
                 <div id="reviews-pagination" class="pagination">
-                    <%= paginate @reviews, param_name: :reviews_page, remote: true, params: { tab: 2 }.compact, only_path: true %>
+                    <%= paginate @reviews,
+                        param_name: :reviews_page,
+                        remote: true,
+                        params: { tab: params[:tab] || 2, reviews_page: (@reviews.current_page == 1 ? 1 : params[:reviews_page]) }.compact,
+                        only_path: true %>
                 </div>
             </div>
 
@@ -103,7 +107,11 @@
                         <%= render partial: "lists/list", collection: @lists, as: :list %>
                     </div>
                     <div id="lists-pagination" class="pagination">
-                        <%= paginate @lists, param_name: :lists_page, remote: true, params: { tab: 3 }.compact, only_path: true %>
+                        <%= paginate @lists,
+                            param_name: :lists_page,
+                            remote: true,
+                            params: { tab: params[:tab] || 3, lists_page: (@lists.current_page == 1 ? 1 : params[:lists_page]) }.compact,
+                            only_path: true %>
                     </div>
                 <% else %>
                     <p class="text-red-500 mt-4">リスト機能を使うにはログインが必要です。</p>
