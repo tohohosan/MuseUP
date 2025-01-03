@@ -2,6 +2,7 @@ class MuseumsController < ApplicationController
     before_action :authenticate_user!, except: [ :index, :show ]
     before_action :set_museum, only: [ :show, :edit, :update, :destroy ]
     before_action :authorize_user!, only: [ :edit, :update, :destroy ]
+    before_action :set_meta_tags, only: [ :show ]
 
     def index
         # Ransack の検索オブジェクトを作成
@@ -110,6 +111,13 @@ class MuseumsController < ApplicationController
     end
 
     private
+
+    def set_meta_tags
+        # OGP 用のメタタグを設定
+        @meta_title = @museum.name.presence || "MuseUP -みゅーじあっぷ-"
+        @meta_description = @museum.description.presence || "ミュージアムをもっと知る、もっと楽しむ。"
+        @meta_image = @museum.images.first.present? ? url_for(@museum.images.first) : request.base_url + asset_path("MuseUP.png")
+    end
 
     def set_museum
         @museum = Museum.find(params[:id])
