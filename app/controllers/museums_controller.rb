@@ -116,7 +116,13 @@ class MuseumsController < ApplicationController
         # OGP 用のメタタグを設定
         @meta_title = @museum.name.presence || "MuseUP -みゅーじあっぷ-"
         @meta_description = @museum.description.presence || "ミュージアムをもっと知る、もっと楽しむ。"
-        @meta_image = @museum.images.first.present? ? url_for(@museum.images.first) : request.base_url + asset_path("MuseUP.png")
+
+        # 画像のURLをCarrierWaveから取得
+        if @museum.images.first.present?
+            @meta_image = request.base_url + @museum.images.first.file.url
+        else
+            @meta_image = request.base_url + ActionController::Base.helpers.asset_path("MuseUP.png")
+        end
     end
 
     def set_museum
