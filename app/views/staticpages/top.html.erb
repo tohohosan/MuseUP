@@ -31,7 +31,11 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-3 mt-12">
+    <div class="font-bold text-xl bg-primary rounded-lg my-8 px-4 py-2">
+        How to Use
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-3">
         <% blocks = [
             { title: 'ミュージアムを知る', path: museums_path, description: 'マップから他のユーザーが投稿したミュージアムを見てみましょう。知らないミュージアムがきっと見つかるはずです。', image: 'MuseUp-index.png',
                 icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -51,16 +55,20 @@
         ] %>
 
         <% blocks.each do |block| %>
-            <div class="flex flex-col justify-between items-center p-4 border rounded-xl shadow-md bg-white min-h-[540px]">
-                <div class="text-primary mb-4">
-                    <%= raw(block[:icon]) %>
+            <div class="flex flex-col items-center gap-4 p-4 border rounded-xl shadow-md bg-white">
+
+                <div class="flex items-center space-x-2 my-3">
+                    <div class="text-primary">
+                        <%= raw(block[:icon]) %>
+                    </div>
+                    <%= link_to block[:title], block[:path], class: 'text-lg font-bold text-primary' %>
                 </div>
-                <%= link_to block[:title], block[:path], class: 'text-lg font-bold text-primary' %>
-                <p class="mt-2 text-center"><%= block[:description] %></p>
+
+                <p class="text-center"><%= block[:description] %></p>
                 <% if block[:note] %>
                     <p class="text-sm text-secondary mt-2"><%= block[:note] %></p>
                 <% end %>
-                <%= image_tag block[:image], class: 'w-full object-cover rounded-lg mt-4 shadow-md' %>
+                <%= image_tag block[:image], class: 'w-full object-cover rounded-lg mt-2 shadow-md' %>
             </div>
         <% end %>
     </div>
