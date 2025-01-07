@@ -37,12 +37,12 @@
 
 | レビュー機能（ログイン限定） |
 |:-----------|
-| This       | 
+| [![Image from Gyazo](https://i.gyazo.com/f24319d00d5ff7a31f1e6cb7f09618ba.gif)](https://gyazo.com/f24319d00d5ff7a31f1e6cb7f09618ba)       | 
 | ユーザーはミュージアムのレビューを投稿できます。レビューの内容と 5 段階の評価を記録できます。     |
 
 | リスト機能（ログイン限定） |
 |:-----------|
-| This       | 
+| [![Image from Gyazo](https://i.gyazo.com/ade8e43cf7fc70db30527666c1eefd03.gif)](https://gyazo.com/ade8e43cf7fc70db30527666c1eefd03)       | 
 | ユーザーはミュージアムをリストに登録できます。デフォルトで「行きたい」と「行った」リストが用意されています。それに加えて、ユーザーは任意のリストを新規作成できます。      |
 
 | メモ機能（ログイン限定） |
