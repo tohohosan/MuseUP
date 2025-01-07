@@ -1,15 +1,4 @@
 <div class="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-md space-y-4">
-    <% if @list.present? && @list.errors.any? %>
-        <div class="alert alert-error" style="background-color: rgba(248, 84, 76, 0.4);">
-        <h2><%= pluralize(@list.errors.count, "エラー") %>が発生しました:</h2>
-        <ul>
-            <% @list.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-        </ul>
-        </div>
-    <% end %>
-
     <%= form_with(model: @list, local: true) do |f| %>
         <h2 class="text-2xl font-semibold text-center mb-4 border-b-2">リスト名編集</h2>
 
