@@ -37,19 +37,27 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-3">
         <% blocks = [
-            { title: 'ミュージアムを知る', path: museums_path, description: 'マップから他のユーザーが投稿したミュージアムを見てみましょう。知らないミュージアムがきっと見つかるはずです。', image: 'MuseUp-index.png',
+            { title: 'ミュージアムを知る', path: museums_path, description: 'マップから他のユーザーが投稿したミュージアムを見てみましょう！知らないミュージアムがきっと見つかるはずです。', image: 'MuseUP-index.png',
                 icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>' },
-            { title: 'ミュージアムを探す', path: museums_path, description: '都道府県やカテゴリから、ミュージアムを探すことができます。あなたの現在地から一番近いミュージアムも見つかります。', image: 'MuseUp-search.png',
+            { title: 'ミュージアムを探す', path: museums_path, description: '名前・都道府県・カテゴリから、ミュージアムを探すことができます。現在地検索で、あなたに一番近いミュージアムも見つかります。', image: 'MuseUP-search.png',
                 icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>' },
-            { title: 'ミュージアムを投稿する', path: new_museum_path, description: '自分が行ったことのあるミュージアムを投稿することもできます。レビューも投稿して、推しミュージアムを他のユーザーにオススメしましょう！', image: 'MuseUp-post.png',
-                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            { title: 'ミュージアムを投稿する', path: new_museum_path, description: 'ミュージアムを新規投稿することができます。ミュージアム名を途中まで入力すると候補がサジェストされ、選択すると住所も自動入力されます。', image: 'MuseUP-post.png',
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                     </svg>', note: 'ログイン限定の機能です。' },
-            { title: 'ミュージアムを楽しむ', path: lists_path, description: 'リスト機能を使えば、ミュージアムを自由に管理することができます。また、ミュージアムに対するプライベートなメモを記録することもできます！', image: 'MuseUp-list.png',
-                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            { title: 'ミュージアムをオススメする', path: museums_path, description: 'ミュージアム詳細ページから、レビューを投稿できます。あなたのオススメポイントをみんなに共有しましょう！', image: 'MuseUP-review.png',
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+                    </svg>', note: 'ログイン限定の機能です。' },
+            { title: 'ミュージアムを楽しむ①', path: lists_path, description: 'リストを使って、ミュージアムを管理することができます。デフォルトの「行きたい」「行った」リストに加えて、任意のリストも作成できます。', image: 'MuseUP-list.png',
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+                </svg>', note: 'ログイン限定の機能です。' },
+            { title: 'ミュージアムを楽しむ②', path: current_user ? user_notes_path(current_user.id) : user_session_path, description: 'ミュージアムに対してプライベートなメモを作成できます。覚えておきたいことは記録しておきましょう！', image: 'MuseUP-note.png',
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
                 </svg>', note: 'ログイン限定の機能です。' }
         ] %>
