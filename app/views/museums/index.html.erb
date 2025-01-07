@@ -7,7 +7,7 @@
   </button>
 
   <!-- リセットボタン -->
-  <%= link_to '現在の検索条件をリセット', museums_path, method: :get, class: "btn btn-secondary w-1/2" %>
+  <%= link_to '現在の検索条件をリセット', museums_path, class: "btn btn-secondary w-1/2", data: { turbo: false } %>
 </div>
 
 <div class="flex justify-center items-center mt-6 mb-6 w-full">
