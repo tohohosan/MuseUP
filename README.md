@@ -42,7 +42,7 @@
 
 | リスト機能（ログイン限定） |
 |:-----------|
-| [![Image from Gyazo](https://i.gyazo.com/ade8e43cf7fc70db30527666c1eefd03.gif)](https://gyazo.com/ade8e43cf7fc70db30527666c1eefd03)       | 
+| [![Image from Gyazo](https://i.gyazo.com/ade8e43cf7fc70db30527666c1eefd03.gif)](https://gyazo.com/ade8e43cf7fc70db30527666c1eefd03)        | 
 | ユーザーはミュージアムをリストに登録できます。デフォルトで「行きたい」と「行った」リストが用意されています。それに加えて、ユーザーは任意のリストを新規作成できます。      |
 
 | メモ機能（ログイン限定） |
