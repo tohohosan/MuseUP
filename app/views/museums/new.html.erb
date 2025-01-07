@@ -3,18 +3,19 @@
         <h2 class="text-2xl font-semibold text-center mb-4 border-b-2">ミュージアム投稿</h2>
 
         <div class="mt-8">
-            <%= f.label :name, "ミュージアム名" %>
-            <%= f.text_field :name, id: "Name", placeholder: "名前を入力してください", class: "input input-bordered w-full" %>
+            <%= f.label :name, "ミュージアム名<span class='text-red-500'>*</span>".html_safe %>
+            <%= f.text_field :name, id: "Name", placeholder: "名前を入力すると候補がサジェストされます", class: "input input-bordered w-full" %>
         </div>
 
         <div class="mt-4">
-            <%= f.label :address, "住所" %>
+            <%= f.label :address, "住所<span class='text-red-500'>*</span>".html_safe %>
             <%= f.text_field :address, id: "Address", placeholder: "ミュージアム名を選択すると自動で入力されます", class: "input input-bordered w-full" %>
         </div>
 
         <div class="mt-4">
-            <%= f.label :description, "説明 (500 字以内)" %>
+            <%= f.label :description, "説明<span class='text-red-500'>*</span>".html_safe %>
             <%= f.text_area :description, id: "Description", placeholder: "どんな場所か簡単に説明してください", class: "input input-bordered w-full" %>
+            <small class="text-gray-500">500 文字以内で入力してください</small>
         </div>
 
         <div class="mt-4">
@@ -23,7 +24,7 @@
         </div>
 
         <div class="mt-4">
-            <%= f.label :categories, "カテゴリ" %>
+            <%= f.label :categories, "カテゴリ<span class='text-red-500'>*</span>".html_safe %>
             <div class="grid grid-cols-3 gap-2 mt-2">
                 <% @categories.each do |category| %>
                     <label class="btn-category">
@@ -37,7 +38,7 @@
 
         <div class="mt-8">
             <%= f.label :images_attributes, "画像アップロード" %>
-            <div class="mt-1 gap-2">
+            <div class="my-1 gap-2">
                 <%= f.fields_for :images do |image_fields| %>
                     <%= image_fields.file_field :file, class: "file-input file-input-bordered w-full" %>
                 <% end %>
@@ -46,7 +47,7 @@
             <small class="text-gray-500">一度にアップロードするファイルは合計 5 MB 以内にしてください</small>
         </div>
 
-        <div class="mt-8">
+        <div class="my-6">
             <%= f.submit "投稿", class: "btn btn-primary w-full" %>
         </div>
     <% end %>

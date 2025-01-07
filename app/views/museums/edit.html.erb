@@ -3,18 +3,19 @@
     <h2 class="text-2xl font-semibold text-center mb-8 border-b-2">ミュージアム編集</h2>
 
         <div class="mt-8">
-            <%= f.label :name, "ミュージアム名" %>
+            <%= f.label :name, "ミュージアム名<span class='text-red-500'>*</span>".html_safe %>
             <%= f.text_field :name, id: "Name", class: "input input-bordered w-full" %>
         </div>
 
         <div class="mt-8">
-            <%= f.label :address, "住所" %>
+            <%= f.label :address, "住所<span class='text-red-500'>*</span>".html_safe %>
             <%= f.text_field :address, id: "Address", class: "input input-bordered w-full" %>
         </div>
 
         <div class="mt-8">
-            <%= f.label :description, "説明 (500 字以内)" %>
+            <%= f.label :description, "説明<span class='text-red-500'>*</span>".html_safe %>
             <%= f.text_area :description, id: "Description", class: "input input-bordered w-full" %>
+            <small class="text-gray-500">500 文字以内で入力してください</small>
         </div>
 
         <div class="mt-8">
@@ -23,7 +24,7 @@
         </div>
 
         <div class="mt-8">
-            <%= f.label :categories, "カテゴリ" %>
+            <%= f.label :categories, "カテゴリ<span class='text-red-500'>*</span>".html_safe %>
             <div class="grid grid-cols-3 gap-2 mt-2">
                 <% @categories.each do |category| %>
                     <label class="btn-category">
@@ -37,7 +38,7 @@
 
         <div class="mt-12">
             <%= f.label :images, "画像" %>
-            <div class="mt-1">
+            <div class="my-1">
                 <% if @museum.images.any? %>
                     <div class="grid grid-cols-2 gap-2 my-4">
                         <% @museum.images.each_with_index do |image, index| %>
@@ -67,7 +68,7 @@
             <small class="text-gray-500">一度にアップロードするファイルは合計 5 MB 以内にしてください</small>
         </div>
 
-        <div class="mt-12">
+        <div class="mt-8">
             <%= f.submit "更新", class: "btn btn-primary w-full" %>
         </div>
 
@@ -79,7 +80,7 @@
                 class: "btn btn-neutral w-full" %>
         </div>
 
-        <div class="mt-5 mb-8 text-center">
+        <div class="my-6 text-center">
             <%= link_to "戻る", museum_path(@museum), class: "text-blue-500 hover:text-blue-700" %><br />
         </div>
     <% end %>
