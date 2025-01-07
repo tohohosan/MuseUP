@@ -37,7 +37,7 @@
 
 | レビュー機能（ログイン限定） |
 |:-----------|
-| [![Image from Gyazo](https://i.gyazo.com/f24319d00d5ff7a31f1e6cb7f09618ba.gif)](https://gyazo.com/f24319d00d5ff7a31f1e6cb7f09618ba)       | 
+| [![Image from Gyazo](https://i.gyazo.com/f24319d00d5ff7a31f1e6cb7f09618ba.gif)](https://gyazo.com/f24319d00d5ff7a31f1e6cb7f09618ba)      | 
 | ユーザーはミュージアムのレビューを投稿できます。レビューの内容と 5 段階の評価を記録できます。     |
 
 | リスト機能（ログイン限定） |
