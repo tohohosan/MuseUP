@@ -47,7 +47,7 @@
 
 | メモ機能（ログイン限定） |
 |:-----------|
-| This       | 
+| [![Image from Gyazo](https://i.gyazo.com/eaf3373f9cb9737ce8e0e1d59521a68e.gif)](https://gyazo.com/eaf3373f9cb9737ce8e0e1d59521a68e)       | 
 | ユーザーはミュージアムに対するプライベートなメモを記録することができます。      |
   
 # 🔧技術構成
