@@ -27,8 +27,8 @@ class User < ApplicationRecord
 
       if auth.info.image.present?
         begin
-          user.image.attach(io: URI.open(auth.info.image), filename: "profile_image.jpg")
-        rescue OpenURI::HTTPError => e
+          user.remote_image_url = auth.info.image
+        rescue => e
           Rails.logger.error("Failed to attach image: #{e.message}")
         end
       end
