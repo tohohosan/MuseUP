@@ -3,7 +3,7 @@
   <div class="flex justify-end text-gray-600 text-sm">
     <%= l(@notice.created_at, format: '%Y-%m-%d') %>
   </div>
-  <div class="text-gray-700"><%= @notice.content %></div>
+  <div class="text-gray-700"><%= simple_format(@notice.content) %></div>
 
   <%= link_to "戻る", notices_path, class: "text-blue-500 hover:text-blue-700 mt-4 block" %>
 </div>
