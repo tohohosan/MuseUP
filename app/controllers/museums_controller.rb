@@ -41,7 +41,15 @@ class MuseumsController < ApplicationController
         respond_to do |format|
             format.html
             format.js
-            format.json { render json: @museum }
+            format.json do
+                render json: {
+                    id: @museum.id,
+                    name: @museum.name,
+                    description: @museum.description,
+                    address: @museum.address,
+                    images: @museum.images.map { |image| image.file.url } # 画像URLを渡す
+                }
+            end
         end
     end
 

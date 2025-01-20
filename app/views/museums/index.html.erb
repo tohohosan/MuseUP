@@ -80,10 +80,20 @@
         fetch(`/museums/${museum.id}.json`)
           .then((response) => response.json())
           .then((data) => {
-            if (data && data.name && data.description) {
+            if (data) {
+              const museumImage = document.getElementById('museumImage');
+              if (data.images && data.images.length > 0) {
+                museumImage.src = data.images[0];
+                museumImage.style.display = 'block';
+              } else {
+                museumImage.style.display = 'none';
+              }
+
               document.getElementById('museumTitle').innerText = data.name;
               document.getElementById('museumDescription').innerText = data.description;
+              document.getElementById('museumLocation').innerText = data.address
               document.getElementById('museumDetailLink').href = `/museums/${museum.id}`;
+
               document.getElementById('museumDetailModal').showModal();
             } else {
               console.error("Unexpected data format:", data);
