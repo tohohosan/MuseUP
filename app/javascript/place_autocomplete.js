@@ -1,7 +1,14 @@
-// Place Autocomplete
-document.addEventListener('DOMContentLoaded', function () {
+// Google Maps APIが読み込まれた後にオートコンプリートを初期化
+function initAutocomplete() {
     const inputName = document.getElementById('Name');
     const inputAddress = document.getElementById('Address');
+    if (!inputAddress) return;  // Addressフィールドが存在しないページでは実行しない
+
+    // Google Maps APIがロードされているか確認
+    if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
+        console.error('Google Maps API is not loaded.');
+        return;
+    }
 
     // オートコンプリートのオプション
     const options = {
@@ -26,4 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         inputName.value = place.name;
         inputAddress.value = place.formatted_address;
     });
-});
+};
+
+// Turboがページ遷移しても動作するように設定
+document.addEventListener('turbo:load', initAutocomplete);
