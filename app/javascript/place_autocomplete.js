@@ -35,5 +35,8 @@ function initAutocomplete() {
     });
 };
 
+// コールバックとして利用するためグローバルスコープに設定
+window.initAutocomplete = initAutocomplete;
+
 // Turboがページ遷移しても動作するように設定
 document.addEventListener('turbo:load', initAutocomplete);
