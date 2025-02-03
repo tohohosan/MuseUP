@@ -33,8 +33,20 @@ function setupDetailMap(mapElement, mapOptions) {
 
 // 一覧ページの地図を設定
 function setupListMap(mapElement, mapOptions) {
-    const center = JSON.parse(mapElement.dataset.center);
-    mapOptions.center = center;
+    // data-center の存在確認と JSON パース
+    const centerData = mapElement.dataset.center;
+    if (centerData) {
+        try {
+            const center = JSON.parse(centerData);
+            mapOptions.center = center;
+        } catch (error) {
+            console.error("Invalid JSON in data-center:", error);
+            return; // 無効なデータの場合は処理を中断
+        }
+    } else {
+        console.error("data-center attribute not found.");
+        return; // data-center属性が存在しない場合は処理を中断
+    }
 
     const map = new google.maps.Map(mapElement, mapOptions);
 
@@ -137,22 +149,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const showSearchModalButton = document.getElementById('show-search-modal-btn');
     const searchModal = document.getElementById('searchModal');
 
-    // モーダルを開くボタンにクリックイベントを追加
-    showSearchModalButton.addEventListener('click', () => {
-        searchModal.showModal(); // 検索モーダルを表示
-    });
+    // モーダルを開くボタンが存在する場合のみイベントリスナーを追加
+    if (showSearchModalButton && searchModal) {
+        showSearchModalButton.addEventListener('click', () => {
+            searchModal.showModal(); // 検索モーダルを表示
+        });
+    }
 
     // 閉じるボタンを取得
     const closeSearchModalButton = document.getElementById('close-search-modal');
 
-    // 閉じるボタンにクリックイベントを追加
-    closeSearchModalButton.addEventListener('click', () => {
-        searchModal.close(); // 検索モーダルを閉じる
-    });
+    // 閉じるボタンが存在する場合のみイベントリスナーを追加
+    if (closeSearchModalButton && searchModal) {
+        closeSearchModalButton.addEventListener('click', () => {
+            searchModal.close(); // 検索モーダルを閉じる
+        });
+    }
 });
 
 function setupLocationSearchButton() {
-    document.getElementById("location-search-btn").addEventListener("click", () => {
+    const searchButton = document.getElementById("location-search-btn"); //検索ボタンの取得
+    if (!searchButton) return;  // 要素が存在しない場合は処理を中断
+
+    searchButton.addEventListener("click", () => {
         if (!navigator.geolocation) {
             alert("お使いのブラウザは位置情報をサポートしていません。");
             return;
@@ -168,7 +187,9 @@ function setupLocationSearchButton() {
 
                 // モーダルを閉じる（検索モーダルの場合）
                 const searchModal = document.getElementById("searchModal");
-                searchModal.close();
+                if (searchModal) {
+                    searchModal.close();
+                }
             },
             (error) => {
                 let message;
