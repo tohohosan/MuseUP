@@ -34,8 +34,8 @@
     <%= javascript_import_module_tag "place_autocomplete" %>
     <%= javascript_import_module_tag "museum_maps" %>
     <%= javascript_import_module_tag "museum_tabs" %>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initAutocomplete"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap&language=ja" async defer></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HEV0D4QJK"></script>
