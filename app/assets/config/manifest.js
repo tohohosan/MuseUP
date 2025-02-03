@@ -5,6 +5,7 @@
 
 //= link application.js
 //= link museum_maps.js
+//= link museum_tabs.js
 //= link place_autocomplete.js
 //= link controllers/application.js
 //= link controllers/hello_controller.js
