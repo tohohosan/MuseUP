@@ -1,5 +1,5 @@
 // Google Maps APIが読み込まれた後にオートコンプリートを初期化
-function initAutocomplete() {
+document.addEventListener('DOMContentLoaded', function () {
     const inputName = document.getElementById('Name');
     const inputAddress = document.getElementById('Address');
     if (!inputAddress) return;  // Addressフィールドが存在しないページでは実行しない
@@ -33,11 +33,4 @@ function initAutocomplete() {
         inputName.value = place.name;
         inputAddress.value = place.formatted_address;
     });
-};
-
-// コールバックとして利用するためグローバルスコープに設定
-window.initAutocomplete = initAutocomplete;
-
-// Turboがページ遷移しても動作するように設定
-document.addEventListener('turbo:load', initAutocomplete);
-document.addEventListener('DOMContentLoaded', initAutocomplete);
+});
