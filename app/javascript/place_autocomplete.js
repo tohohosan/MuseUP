@@ -40,3 +40,4 @@ window.initAutocomplete = initAutocomplete;
 
 // Turboがページ遷移しても動作するように設定
 document.addEventListener('turbo:load', initAutocomplete);
+document.addEventListener('DOMContentLoaded', initAutocomplete);
