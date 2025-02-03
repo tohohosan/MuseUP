@@ -65,7 +65,16 @@ function setupListMap(mapElement, mapOptions) {
 
 // Turboフックを追加してページ遷移時にGoogle Mapを再初期化
 document.addEventListener("turbo:load", () => {
-    initMap(); // Turboページロード時に地図を初期化
+    const mapElement = document.getElementById("map");
+    if (mapElement) {
+        const pageType = mapElement.dataset.pageType;
+        // ページタイプに応じて地図を初期化
+        if (pageType === "detail") {
+            setupDetailMap(mapElement, { zoom: 10 });
+        } else {
+            setupListMap(mapElement, { zoom: 7.3 });
+        }
+    }
     setupLocationSearchButton();
 });
 
