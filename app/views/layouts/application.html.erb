@@ -31,10 +31,10 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
     <%= javascript_importmap_tags %>
-    <%= javascript_import_module_tag "museum_maps" %>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap&language=ja" async defer></script>
     <%= javascript_import_module_tag "place_autocomplete" %>
+    <%= javascript_import_module_tag "museum_maps" %>
     <%= javascript_import_module_tag "museum_tabs" %>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap&callback=initAutocomplete&language=ja" async defer></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HEV0D4QJK"></script>
