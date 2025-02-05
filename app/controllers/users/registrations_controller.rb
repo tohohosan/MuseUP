@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_up(resource_name, resource)
       respond_with resource, location: after_sign_up_path_for(resource)
     else
-      flash[:alert] = resource.errors.full_messages.join("。")
+      flash[:alert] = @user.errors.full_messages.join("。")
       clean_up_passwords resource
       set_minimum_password_length
       respond_with resource
@@ -29,7 +29,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash[:notice] = "プロフィールを更新しました。"
       redirect_to user_path(current_user.id)
     else
-      flash[:alert] = resource.errors.full_messages.join("。")
+      flash[:alert] = @user.errors.full_messages.join("。")
       render :edit
     end
   end
