@@ -1,6 +1,8 @@
 // Google Maps APIが読み込まれた後にオートコンプリートを初期化
 document.addEventListener('DOMContentLoaded', function () {
     const inputName = document.getElementById('Name');
+    if (!inputName) return;  // Nameフィールドが存在しないページでは実行しない
+
     const inputAddress = document.getElementById('Address');
     if (!inputAddress) return;  // Addressフィールドが存在しないページでは実行しない
 
