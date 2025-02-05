@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, if: :password_required?
 
   has_many :museums, dependent: :destroy
   has_many :reviews, dependent: :destroy
@@ -40,5 +40,10 @@ class User < ApplicationRecord
   def create_default_lists
     lists.create(name: "行きたい", default: true)
     lists.create(name: "行った", default: true)
+  end
+
+  # パスワードが必要な場合だけバリデーションを行う
+  def password_required?
+    new_record? || password.present?
   end
 end
