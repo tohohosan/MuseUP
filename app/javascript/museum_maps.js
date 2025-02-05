@@ -221,7 +221,7 @@ function setupLocationSearchButton() {
     });
 }
 
-// コールバックとして利用するためグローバルスコープに設定
+// Google Maps APIのコールバックとして利用するためグローバルスコープに設定
 window.initMap = initMap;
 // 初期化関数をエクスポート
 export { initMap, setupLocationSearchButton };
