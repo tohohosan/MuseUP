@@ -8,7 +8,7 @@ Rails.application.configure do
   config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
-  config.assets.compile = false
+  config.assets.compile = true
 
   config.action_mailer.default_url_options = { host: "https://museup.jp" }
   config.action_mailer.delivery_method = :smtp
