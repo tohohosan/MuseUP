@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Users::RegistrationsController < Devise::RegistrationsController
   def show
     @user = current_user
@@ -9,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     if resource.save
-      flash[:notice] = "ユーザー登録に成功しました。" # 成功メッセージ
+      flash[:notice] = "ユーザー登録に成功しました。"
       sign_up(resource_name, resource)
       respond_with resource, location: after_sign_up_path_for(resource)
     else

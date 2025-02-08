@@ -1,5 +1,5 @@
 class ImageUploader < CarrierWave::Uploader::Base
-  include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick # mini_magickを使用するための記述
 
   # 環境ごとのストレージ設定
   if Rails.env.production? || Rails.env.development?

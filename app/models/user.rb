@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable,
         :omniauthable, omniauth_providers: %i[google_oauth2 twitter2]
+
   after_create :create_default_lists
 
   mount_uploader :image, ImageUploader
@@ -42,7 +43,6 @@ class User < ApplicationRecord
     lists.create(name: "行った", default: true)
   end
 
-  # パスワードが必要な場合だけバリデーションを行う
   def password_required?
     new_record? || password.present?
   end
