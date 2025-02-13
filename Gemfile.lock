@@ -555,7 +555,6 @@ DEPENDENCIES
   ransack
   rspec-rails
   rubocop-rails-omakase
-  ruby-vips
   sassc (~> 2.4.0)
   selenium-webdriver
   shoulda-matchers
