@@ -5,20 +5,17 @@ class MuseumsController < ApplicationController
     before_action :set_meta_tags, only: [ :show ]
 
     def index
-        # Ransack の検索オブジェクトを作成
         @q = Museum.ransack(params[:q])
-        # 検索結果を適用（デフォルトはすべてのミュージアム）
-        @museums = @q.result.includes(:categories)
-        # 検索結果件数を計算
-        @search_results_count = @museums.count
+        @museums = @q.result.includes(:categories).order(created_at: :asc)
 
+        @search_results_count = @museums.count
         @total_museum_count = Museum.count
         @user_museum_count = current_user.museums.count if user_signed_in?
 
-        @map_center = if @museums.present?
-                        { lat: @museums.first.latitude, lng: @museums.first.longitude }
+        if params[:q].blank? || @search_results_count.zero?
+            @map_center = { lat: 35.778429, lng: 136.815916 }
         else
-                        { lat: 35.778429, lng: 136.815916 } # デフォルト位置
+            @map_center = { lat: @museums.first.latitude, lng: @museums.first.longitude }
         end
     end
 
@@ -47,7 +44,7 @@ class MuseumsController < ApplicationController
                     name: @museum.name,
                     description: @museum.description,
                     address: @museum.address,
-                    images: @museum.images.map { |image| image.file.url } # 画像URLを渡す
+                    images: @museum.images.map { |image| image.file.url }
                 }
             end
         end
@@ -55,14 +52,13 @@ class MuseumsController < ApplicationController
 
     def new
         @museum = current_user.museums.build
-        @museum.images.build while @museum.images.size < 4 # 最大4つまで初期化
+        @museum.images.build while @museum.images.size < 4
         @categories = Category.all
     end
 
     def create
         @museum = current_user.museums.build(museum_params)
 
-        # 空の画像データを取り除く
         if params[:museum][:images_attributes].present?
             params[:museum][:images_attributes].each do |key, image|
                 if image[:file].is_a?(Array)
@@ -108,7 +104,6 @@ class MuseumsController < ApplicationController
         latitude = params[:latitude].to_f
         longitude = params[:longitude].to_f
 
-        # Geocoder を使って現在地に最も近いミュージアムを検索
         nearest_museum = Museum.near([ latitude, longitude ], 50).first
 
         if nearest_museum
@@ -121,11 +116,9 @@ class MuseumsController < ApplicationController
     private
 
     def set_meta_tags
-        # OGP 用のメタタグを設定
         @meta_title = @museum.name.presence || "MuseUP -みゅーじあっぷ-"
         @meta_description = @museum.description.presence || "ミュージアムをもっと知る、もっと楽しむ。"
 
-        # 画像のURLをCarrierWaveから取得
         if @museum.images.first.present?
             @meta_image = request.base_url + @museum.images.first.file.url
         else
