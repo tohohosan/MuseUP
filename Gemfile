@@ -35,8 +35,6 @@ gem "devise-i18n-views"
 
 gem "rails-i18n"
 
-gem "aws-sdk-s3", require: false
-
 gem "geocoder"
 
 gem "ransack"
@@ -46,10 +44,12 @@ gem "kaminari"
 gem "rails_admin"
 gem "cancancan"
 
+gem "aws-sdk-s3", require: false
+gem "fog-aws"
+
 gem "image_processing", "~> 1.2"
 gem "mini_magick"
 gem "carrierwave"
-gem "fog-aws"
 
 gem "meta-tags"
 
