@@ -33,7 +33,6 @@ class Museum < ApplicationRecord
     errors.add(:categories, "を少なくとも1つ選択してください") if categories.empty?
   end
 
-  # 画像が4枚以内であることを確認するカスタムバリデーション
   def validate_image_count
     if images.size > 4
       errors.add(:images, "画像は最大4枚までアップロードできます")
@@ -44,7 +43,7 @@ class Museum < ApplicationRecord
     if address.present?
       geocoded = Geocoder.search(address)
       if geocoded.blank? || geocoded.first&.coordinates.blank?
-        errors.add(:address, "が有効な住所ではありません") # より具体的なメッセージに修正
+        errors.add(:address, "が有効な住所ではありません")
       end
     else
     errors.add(:address, "を入力してください")
