@@ -1,15 +1,14 @@
-// 地図とマーカーを初期化
 function initMap() {
     const mapElement = document.getElementById("map");
-    if (!mapElement) return; // マップ要素が存在しない場合は終了
+    if (!mapElement) return;
 
-    const pageType = mapElement.dataset.pageType; // ページタイプを取得
+    const pageType = mapElement.dataset.pageType;
     const mapOptions = { zoom: 7.3 };
 
     if (pageType === "detail") {
-        setupDetailMap(mapElement, mapOptions); // ミュージアム詳細ページの場合
+        setupDetailMap(mapElement, mapOptions);
     } else {
-        setupListMap(mapElement, mapOptions); // ミュージアム一覧ページの場合
+        setupListMap(mapElement, mapOptions);
     }
 }
 
@@ -20,7 +19,7 @@ function setupDetailMap(mapElement, mapOptions) {
     const museumName = mapElement.dataset.museumName || "ミュージアム";
 
     mapOptions.center = { lat: latitude, lng: longitude };
-    mapOptions.zoom = 10; // 詳細ページではズームレベルを10に設定
+    mapOptions.zoom = 10;
 
     const map = new google.maps.Map(mapElement, mapOptions);
 
@@ -33,7 +32,6 @@ function setupDetailMap(mapElement, mapOptions) {
 
 // 一覧ページの地図を設定
 function setupListMap(mapElement, mapOptions) {
-    // data-center の存在確認と JSON パース
     const centerData = mapElement.dataset.center;
     if (centerData) {
         try {
@@ -41,11 +39,11 @@ function setupListMap(mapElement, mapOptions) {
             mapOptions.center = center;
         } catch (error) {
             console.error("Invalid JSON in data-center:", error);
-            return; // 無効なデータの場合は処理を中断
+            return;
         }
     } else {
         console.error("data-center attribute not found.");
-        return; // data-center属性が存在しない場合は処理を中断
+        return;
     }
 
     const map = new google.maps.Map(mapElement, mapOptions);
@@ -68,7 +66,6 @@ document.addEventListener("turbo:load", () => {
     const mapElement = document.getElementById("map");
     if (mapElement) {
         const pageType = mapElement.dataset.pageType;
-        // ページタイプに応じて地図を初期化
         if (pageType === "detail") {
             setupDetailMap(mapElement, { zoom: 10 });
         } else {
@@ -78,20 +75,19 @@ document.addEventListener("turbo:load", () => {
     setupLocationSearchButton();
 });
 
+// 閉じるボタンをクリックしたときにモーダルを閉じる
 document.addEventListener('DOMContentLoaded', () => {
-    // 閉じるボタンの取得
     const closeModalButton = document.getElementById('close-overview-modal');
     const museumDetailModal = document.getElementById('museumDetailModal');
 
-    // 要素が存在する場合のみイベントリスナーを追加
     if (closeModalButton && museumDetailModal) {
         closeModalButton.addEventListener('click', () => {
-            museumDetailModal.close(); // モーダルを閉じる
+            museumDetailModal.close();
         });
     }
 });
 
-// マーカー追加
+// 地図上のマーカーの処理
 function addMarkersToMap(museums, map) {
     museums.forEach((museum) => {
         const marker = new google.maps.Marker({
@@ -151,34 +147,32 @@ function fetchNearestMuseum(userLocation) {
         });
 }
 
+// 検索モーダルの処理
 document.addEventListener('DOMContentLoaded', () => {
     setupLocationSearchButton(); // 現在地検索ボタンの初期化
 
-    // モーダルを開くボタンを取得
     const showSearchModalButton = document.getElementById('show-search-modal-btn');
     const searchModal = document.getElementById('searchModal');
 
-    // モーダルを開くボタンが存在する場合のみイベントリスナーを追加
     if (showSearchModalButton && searchModal) {
         showSearchModalButton.addEventListener('click', () => {
-            searchModal.showModal(); // 検索モーダルを表示
+            searchModal.showModal();
         });
     }
 
-    // 閉じるボタンを取得
     const closeSearchModalButton = document.getElementById('close-search-modal');
 
-    // 閉じるボタンが存在する場合のみイベントリスナーを追加
     if (closeSearchModalButton && searchModal) {
         closeSearchModalButton.addEventListener('click', () => {
-            searchModal.close(); // 検索モーダルを閉じる
+            searchModal.close();
         });
     }
 });
 
+// 現在地検索ボタンの処理
 function setupLocationSearchButton() {
-    const searchButton = document.getElementById("location-search-btn"); //検索ボタンの取得
-    if (!searchButton) return;  // 要素が存在しない場合は処理を中断
+    const searchButton = document.getElementById("location-search-btn");
+    if (!searchButton) return;
 
     searchButton.addEventListener("click", () => {
         if (!navigator.geolocation) {
@@ -194,7 +188,6 @@ function setupLocationSearchButton() {
                 };
                 fetchNearestMuseum(userLocation);
 
-                // モーダルを閉じる（検索モーダルの場合）
                 const searchModal = document.getElementById("searchModal");
                 if (searchModal) {
                     searchModal.close();
@@ -221,7 +214,7 @@ function setupLocationSearchButton() {
     });
 }
 
-// Google Maps APIのコールバックとして利用するためグローバルスコープに設定
+// グローバルスコープに設定
 window.initMap = initMap;
 // 初期化関数をエクスポート
 export { initMap, setupLocationSearchButton };
