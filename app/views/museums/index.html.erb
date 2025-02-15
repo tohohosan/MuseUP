@@ -6,7 +6,6 @@
     詳しく検索する
   </button>
 
-  <!-- リセットボタン -->
   <%= link_to '現在の検索条件をリセット', museums_path, class: "btn btn-secondary w-1/2", data: { turbo: false } %>
 </div>
 
@@ -40,7 +39,6 @@
 </div>
 <div id="map" style="height: 1000px;" data-center="<%= @map_center.to_json %>"></div>
 
-<!-- 検索モーダルの表示 -->
 <dialog id="searchModal" class="modal">
   <div class="modal-box space-y-4">
     <%= render 'museums/search_form' %>
@@ -50,7 +48,6 @@
   </div>
 </dialog>
 
-<!-- ミュージアム概要モーダルの表示 -->
 <dialog id="museumDetailModal" class="modal">
   <div class="modal-box">
     <h3 id="museumTitle" class="text-lg font-bold">ミュージアム詳細</h3>
