@@ -76,7 +76,7 @@ document.addEventListener("turbo:load", () => {
 });
 
 // 閉じるボタンをクリックしたときにモーダルを閉じる
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbo:load', () => {
     const closeModalButton = document.getElementById('close-overview-modal');
     const museumDetailModal = document.getElementById('museumDetailModal');
 
@@ -125,7 +125,7 @@ function addMarkersToMap(museums, map) {
 }
 
 // 検索モーダルの処理
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbo:load', () => {
     setupLocationSearchButton(); // 現在地検索ボタンの処理
 
     const showSearchModalButton = document.getElementById('show-search-modal-btn');

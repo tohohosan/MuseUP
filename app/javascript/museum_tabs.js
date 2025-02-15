@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbo:load', function() {
     const tabs = document.querySelectorAll('.tabs input[type="radio"]'); //ラジオボタンを取得
     const contents = document.querySelectorAll('.tab-content'); //タブに対応するコンテンツを取得
 
