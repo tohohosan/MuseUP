@@ -124,32 +124,9 @@ function addMarkersToMap(museums, map) {
     });
 }
 
-// 位置情報で近隣のミュージアムを取得
-function fetchNearestMuseum(userLocation) {
-    fetch(`/museums/nearest?latitude=${userLocation.lat}&longitude=${userLocation.lng}`)
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.museum) {
-                const mapElement = document.getElementById('map');
-                const map = new google.maps.Map(mapElement, {
-                    center: userLocation,
-                    zoom: 11,
-                });
-
-                // 最寄りのミュージアムをマップに追加
-                addMarkersToMap([data.museum], map);
-            } else {
-                alert("近くにミュージアムが見つかりませんでした。");
-            }
-        })
-        .catch((error) => {
-            console.error("エラーが発生しました:", error);
-        });
-}
-
 // 検索モーダルの処理
 document.addEventListener('DOMContentLoaded', () => {
-    setupLocationSearchButton(); // 現在地検索ボタンの初期化
+    setupLocationSearchButton(); // 現在地検索ボタンの処理
 
     const showSearchModalButton = document.getElementById('show-search-modal-btn');
     const searchModal = document.getElementById('searchModal');
@@ -212,6 +189,29 @@ function setupLocationSearchButton() {
             }
         );
     });
+}
+
+// 位置情報で近隣のミュージアムを取得
+function fetchNearestMuseum(userLocation) {
+    fetch(`/museums/nearest?latitude=${userLocation.lat}&longitude=${userLocation.lng}`)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.museum) {
+                const mapElement = document.getElementById('map');
+                const map = new google.maps.Map(mapElement, {
+                    center: userLocation,
+                    zoom: 11,
+                });
+
+                // 最寄りのミュージアムをマップに追加
+                addMarkersToMap([data.museum], map);
+            } else {
+                alert("近くにミュージアムが見つかりませんでした。");
+            }
+        })
+        .catch((error) => {
+            console.error("エラーが発生しました:", error);
+        });
 }
 
 // グローバルスコープに設定
