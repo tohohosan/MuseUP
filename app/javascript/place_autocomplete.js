@@ -1,10 +1,9 @@
-// Google Maps APIが読み込まれた後にオートコンプリートを初期化
 function initAutocomplete() {
     const inputName = document.getElementById('Name');
-    if (!inputName) return;  // Nameフィールドが存在しないページでは実行しない
+    if (!inputName) return;
 
     const inputAddress = document.getElementById('Address');
-    if (!inputAddress) return;  // Addressフィールドが存在しないページでは実行しない
+    if (!inputAddress) return;
 
     // オートコンプリートのオプション
     const options = {
