@@ -7,18 +7,6 @@
     </div>
 
     <% if @museum.present? %>
-        <div class="mr-2 my-4">
-            <% unless list.museums.include?(@museum) %>
-                <%= button_to "登録する", add_museum_list_path(list, museum_id: @museum.id),
-                        method: :post,
-                        remote: true,
-                        class: "btn btn-sm" %>
-            <% else %>
-                <%= button_to "登録解除", remove_museum_list_path(list, museum_id: @museum.id),
-                        method: :delete,
-                        remote: true,
-                        class: "btn btn-sm" %>
-            <% end %>
-        </div>
+        <%= render 'lists/museum_button', list: list %>
     <% end %>
 </div>
