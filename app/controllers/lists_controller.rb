@@ -67,8 +67,16 @@ class ListsController < ApplicationController
         @list_museums_counts = @list.user.lists.joins(:museums).group(:id).count
 
         respond_to do |format|
-            format.turbo_stream { render turbo_stream: turbo_stream.replace("museum_button_#{@museum.id}", partial: "lists/museum_button", locals: { list: @list, museum: @museum }) }
-            format.html { redirect_to request.referer, notice: "リストに追加しました。" }
+            format.turbo_stream do
+                render turbo_stream: [
+                    turbo_stream.replace("museum_button_#{@list.id}_#{@museum.id}",
+                        partial: "lists/museum_button",
+                        locals: { list: @list, museum: @museum }),
+                    turbo_stream.replace("museum_counts_#{@list.id}",
+                        partial: "lists/museum_counts",
+                        locals: { list: @list, count: @list_museums_counts[@list.id] || 0 })
+                ]
+            end
         end
     end
 
@@ -76,16 +84,21 @@ class ListsController < ApplicationController
         @museum = Museum.find(params[:museum_id])
         if @list.museums.include?(@museum)
             @list.museums.delete(@museum)
-            flash[:notice] = "リストから削除しました。"
-        else
-            flash[:alert] = "指定された博物館はリストに登録されていません。"
         end
 
         @list_museums_counts = @list.user.lists.joins(:museums).group(:id).count
 
         respond_to do |format|
-            format.turbo_stream { render turbo_stream: turbo_stream.replace("museum_button_#{@museum.id}", partial: "lists/museum_button", locals: { list: @list, museum: @museum }) }
-            format.html { redirect_to request.referer, notice: "リストから削除しました。" }
+            format.turbo_stream do
+                render turbo_stream: [
+                    turbo_stream.replace("museum_button_#{@list.id}_#{@museum.id}",
+                        partial: "lists/museum_button",
+                        locals: { list: @list, museum: @museum }),
+                    turbo_stream.replace("museum_counts_#{@list.id}",
+                        partial: "lists/museum_counts",
+                        locals: { list: @list, count: @list_museums_counts[@list.id] || 0 })
+                ]
+            end
         end
     end
 
