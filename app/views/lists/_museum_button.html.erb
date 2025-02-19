@@ -1,13 +1,13 @@
-<div class="mr-2 my-4 id="museum_button_<%= @museum.id %>">
-<% unless list.museums.include?(@museum) %>
-    <%= link_to "登録する", add_museum_list_path(list, museum_id: @museum.id),
-        method: :post,
-        class: "btn btn-sm",
-        data: { turbo_method: :post, turbo_frame: "museum_button_#{@museum.id}" } %>
-<% else %>
-    <%= link_to "登録解除", remove_museum_list_path(list, museum_id: @museum.id),
-        method: :delete,
-        class: "btn btn-sm",
-        data: { turbo_method: :delete, turbo_frame: "museum_button_#{@museum.id}" } %>
-<% end %>
+<div id="museum_button_<%= list.id %>_<%= @museum.id %>" class="mr-2 my-4">
+    <% unless list.museums.include?(@museum) %>
+        <%= link_to "登録する", add_museum_list_path(list, museum_id: @museum.id),
+            method: :post,
+            class: "btn btn-sm",
+            data: { turbo_method: :post, turbo_frame: "museum_button_#{@museum.id}" } %>
+    <% else %>
+        <%= link_to "登録解除", remove_museum_list_path(list, museum_id: @museum.id),
+            method: :delete,
+            class: "btn btn-sm",
+            data: { turbo_method: :delete, turbo_frame: "museum_button_#{@museum.id}" } %>
+    <% end %>
 </div>
