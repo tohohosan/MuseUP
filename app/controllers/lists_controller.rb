@@ -63,7 +63,11 @@ class ListsController < ApplicationController
         unless @list.museums.include?(museum)
             @list.museums << museum
         end
-        redirect_back fallback_location: museum_path(museum), notice: "リストに追加しました。"
+
+        redpond_to do |format|
+            format.js
+            format.html { redirect_back fallback_location: museum_path(museum), notice: "リストに追加しました。" }
+        end
     end
 
     def remove_museum
@@ -74,7 +78,11 @@ class ListsController < ApplicationController
         else
             flash[:alert] = "指定された博物館はリストに登録されていません。"
         end
-        redirect_back fallback_location: museum_path(museum)
+
+        respond_to do |format|
+            format.js
+            format.html { redirect_back fallback_location: museum_path(museum) }
+        end
     end
 
     private
