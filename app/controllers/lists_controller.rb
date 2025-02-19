@@ -59,29 +59,33 @@ class ListsController < ApplicationController
     end
 
     def add_museum
-        museum = Museum.find(params[:museum_id])
-        unless @list.museums.include?(museum)
-            @list.museums << museum
+        @museum = Museum.find(params[:museum_id])
+        unless @list.museums.include?(@museum)
+            @list.museums << @museum
         end
 
-        redpond_to do |format|
-            format.js
-            format.html { redirect_back fallback_location: museum_path(museum), notice: "リストに追加しました。" }
+        @list_museums_counts = @list.user.lists.joins(:museums).group(:id).count
+
+        respond_to do |format|
+            format.turbo_stream { render turbo_stream: turbo_stream.replace("museum_button_#{@museum.id}", partial: "lists/museum_button", locals: { list: @list, museum: @museum }) }
+            format.html { redirect_to request.referer, notice: "リストに追加しました。" }
         end
     end
 
     def remove_museum
-        museum = Museum.find(params[:museum_id])
-        if @list.museums.include?(museum)
-            @list.museums.delete(museum)
+        @museum = Museum.find(params[:museum_id])
+        if @list.museums.include?(@museum)
+            @list.museums.delete(@museum)
             flash[:notice] = "リストから削除しました。"
         else
             flash[:alert] = "指定された博物館はリストに登録されていません。"
         end
 
+        @list_museums_counts = @list.user.lists.joins(:museums).group(:id).count
+
         respond_to do |format|
-            format.js
-            format.html { redirect_back fallback_location: museum_path(museum) }
+            format.turbo_stream { render turbo_stream: turbo_stream.replace("museum_button_#{@museum.id}", partial: "lists/museum_button", locals: { list: @list, museum: @museum }) }
+            format.html { redirect_to request.referer, notice: "リストから削除しました。" }
         end
     end
 
