@@ -17,7 +17,7 @@
 # 💻主要な機能
 | ユーザー登録、ログイン機能 |
 |:-----------|
-|[![Image from Gyazo](https://i.gyazo.com/0579d80950d531112d1b30fe9dc0a36d.gif)](https://gyazo.com/0579d80950d531112d1b30fe9dc0a36d)      | 
+|[![Image from Gyazo](https://i.gyazo.com/bfe842646f42352ddbf27202b5e47f90.gif)](https://gyazo.com/bfe842646f42352ddbf27202b5e47f90)     | 
 | メールアドレスとパスワードを設定して、ユーザー登録ができます。また、ログインのハードルを下げるため、Google アカウントや X のアカウントでもログインが可能です。     |
 
 | ミュージアム検索 |
